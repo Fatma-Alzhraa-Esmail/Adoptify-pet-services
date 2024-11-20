@@ -1,6 +1,8 @@
+import 'package:adoptify/assets/assets.dart';
 import 'package:adoptify/services/register/logic/google_auth_cubit/google_auth_cubit.dart';
 import 'package:adoptify/services/register/logic/google_auth_cubit/google_auth_state.dart';
 import 'package:adoptify/utilities/components/social_button.dart';
+import 'package:adoptify/utilities/components/success_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,21 +16,33 @@ class GoogleAuthWidget extends StatelessWidget {
     return BlocProvider(
       create: (context) => GoogleAuthCubit(),
       child: BlocConsumer<GoogleAuthCubit, GoogleAuthState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is GoogleAuthLoading){}
+          else if(state is GoogleAuthStateFailaure){
+
+
+          }
+          else if(state is GoogleAuthStateSuccess){
+                        showCustomDialog(context);
+
+          }
+        },
         builder: (context, state) {
           var googleAuthCubit = context.read<GoogleAuthCubit>();
 
-          return SocialButton(
+          return  SocialButton(
             onTap: () => googleAuthCubit.signUpWithGoogle(),
             buttonColor: Colors.red,
             height: 44,
             imagee: Image.asset(
-              'assets/images/google-removebg-preview (1).png',
+              Assets.assetsImagesGoogleRemovebgPreview1,
               fit: BoxFit.cover,
               width: 45,
               height: 45,
             ),
-            text: 'Google',
+            textContent:"Google" ,
+            isLoading: !googleAuthCubit.isLoading,
+            text: Text('Google') ,
           );
         },
       ),

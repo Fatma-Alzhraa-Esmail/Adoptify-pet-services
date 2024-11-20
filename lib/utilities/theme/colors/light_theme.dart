@@ -26,6 +26,6 @@ class LightTheme implements ColorsTheme {
   @override
   Color inactiveProgress = const Color(0xffE7E7E7);
 
-  Color mainColor = Colors.amber.shade300;
+  Color mainColor = Colors.amber;
 
 }

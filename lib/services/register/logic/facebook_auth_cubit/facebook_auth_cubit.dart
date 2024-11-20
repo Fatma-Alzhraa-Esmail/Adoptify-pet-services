@@ -28,6 +28,8 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
     emit(FacebookAuthLoading());
 
     try {
+            isLoading = true;
+
       List<String> permissions = ['public_profile', 'email'];
       final LoginResult result = await FacebookAuth.instance.login(
           permissions: permissions, loginBehavior: LoginBehavior.dialogOnly);
@@ -46,7 +48,6 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
                 .collection('users')
                 .doc(userCredential.user!.uid)
                 .get();
-                  isLoading = true;
 
         if (userSnapshot.exists) {
           // User already exists, return their account data
@@ -83,6 +84,12 @@ class FacebookAuthCubit extends Cubit<FacebookAuthState> {
 
   Future<void> signOutFaceBook() async {
     await _auth.signOut();
+    SharedHandler.instance!.clear(keys: [
+      SharedKeys().isLogin,
+      SharedKeys().isRegister,
+      SharedKeys().user
+    ]);
+    CustomNavigator.push(Routes.home, clean: true);
   }
 
   Future<void> _saveUserDataFacebook(User user) async {

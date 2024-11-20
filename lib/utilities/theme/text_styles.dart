@@ -24,7 +24,7 @@ abstract class AppTextStyles{
   /// - weight: w500
   /// - family: inter
   /// - color: black `(default)`
-  static const TextStyle w500 =  TextStyle(fontWeight: FontWeight.w500,color: Colors.black);
+  static const TextStyle w500 =  TextStyle(fontWeight: FontWeight.w500,color: Colors.black,fontSize: 16);
 
   /// - weight: w600
   /// - family: inter
@@ -34,7 +34,7 @@ abstract class AppTextStyles{
   /// - weight: w700
   /// - family: inter
   /// - color: black `(default)`
-  static const TextStyle w700 =  TextStyle(fontWeight: FontWeight.w700,color: Colors.black);
+  static const TextStyle w700 =  TextStyle(fontWeight: FontWeight.w700,color: Colors.black, fontSize: 26);
 
   /// - weight: w800
   /// - family: inter

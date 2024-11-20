@@ -8,6 +8,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class RegisterCubit extends Cubit<RegisterState> with Validations {
   RegisterCubit() : super(RegisterInitial());
@@ -46,22 +47,7 @@ class RegisterCubit extends Cubit<RegisterState> with Validations {
   String phoneNumber = '';
 
   UserModel? usermodel;
-
-  // bool emailValidate() {
-  //   emailError = isValidEmail(emailcontroller.text);
-  //   emailIsValid = emailError.isEmpty;
-  //   emit(EmailVaildatestate(emailValidate: emailIsValid));
-  //   return emailIsValid;
-  // }
-
-//   bool phoneValidate() {
-//     // if (phoneIsValid) {
-//     //   print("phoneIsValidate ${phoneIsValid}");
-//     //   emit(PhoneVaildatestate());
-//     // }
-//  print("phoneIsValidate ${phoneIsValid}");
-//     return phoneIsValid;
-//   }
+  PhoneNumber number = PhoneNumber(isoCode: 'US');
 
   bool isEmpty() {
     var formIsEmpty = namecontroller.text.isNotEmpty &&
@@ -168,5 +154,12 @@ class RegisterCubit extends Cubit<RegisterState> with Validations {
 
   Future<void> signOut() async {
     await _auth.signOut();
+    await _auth.signOut();
+    SharedHandler.instance!.clear(keys: [
+      SharedKeys().isLogin,
+      SharedKeys().isRegister,
+      SharedKeys().user
+    ]);
+    CustomNavigator.push(Routes.home, clean: true);
   }
 }

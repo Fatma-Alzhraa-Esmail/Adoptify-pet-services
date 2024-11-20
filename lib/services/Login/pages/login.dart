@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: 45,
                               height: 45,
                             ),
-                            text: 'Google',
+                            text: Text('Google'),
                           )),
                           SizedBox(
                             width: 16,
@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: 30,
                               height: 30,
                             ),
-                            text: 'Facebook',
+                            text: Text('Facebook'),
                           ))
                         ],
                       ),

@@ -6,6 +6,7 @@ import 'package:adoptify/services/register/logic/google_auth_cubit/google_auth_s
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAuthCubit extends Cubit<GoogleAuthState> {
@@ -26,6 +27,8 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
     emit(GoogleAuthLoading());
 
     try {
+      isLoading = true;
+
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
           await googleUser!.authentication;
@@ -44,7 +47,6 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
               .collection('users')
               .doc(userCredential.user!.uid)
               .get();
-      isLoading = true;
 
       if (userSnapshot.exists) {
         // User already exists, return their account data
@@ -76,9 +78,12 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
-    SharedHandler.instance!
-        .clear(keys: [SharedKeys().isLogin, SharedKeys().isRegister,SharedKeys().user]);
-
+    SharedHandler.instance!.clear(keys: [
+      SharedKeys().isLogin,
+      SharedKeys().isRegister,
+      SharedKeys().user
+    ]);
+    CustomNavigator.push(Routes.home, clean: true);
   }
 
   Future<void> _saveUserData(User user) async {
