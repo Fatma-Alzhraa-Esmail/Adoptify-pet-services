@@ -1,4 +1,4 @@
-import 'package:peto_care/services/register/logic/email_auth_cubit/register_cubit.dart';
+import 'package:peto_care/services/auth/register/cubit/email_auth_cubit/register_cubit.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';

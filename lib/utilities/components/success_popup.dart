@@ -1,8 +1,10 @@
+import 'package:peto_care/handlers/icon_handler.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
-void showCustomDialog(BuildContext context) {
+void showCustomDialog(BuildContext context,
+    { String? headerTitle,  String? content}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -17,19 +19,25 @@ void showCustomDialog(BuildContext context) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-             Icon(Icons.check_circle,color: LightTheme().mainColor,size: 48,),
-             SizedBox(height: 16,),
-             Text(
-                'Congratulations!',
-                style: AppTextStyles.w600,
-              ),
-              SizedBox(height: 12.0),
-              Text(
-                'Your account is ready to use, you will be redirected to the Home page in s few seconds.',
-                textAlign: TextAlign.center,
-                style: AppTextStyles.w600,
-              ),
               
+              CircleAvatar(
+                backgroundColor: LightTheme().mainColor.withOpacity(0.15),
+                radius: 40,
+                child:drawSvgIcon('success',iconColor:LightTheme().mainColor,height: 40,width: 40,) ,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                headerTitle ??'',
+                style: AppTextStyles.w700.copyWith(fontSize: 22),
+              ),
+              SizedBox(height: 10.0),
+              Text(
+                content??'',
+                textAlign: TextAlign.center,
+                style: AppTextStyles.w500,
+              ),
             ],
           ),
         ),

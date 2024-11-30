@@ -3,7 +3,7 @@ import 'package:peto_care/core/validator.dart';
 import 'package:peto_care/handlers/shared_handler.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
-import 'package:peto_care/services/register/logic/email_auth_cubit/register_state.dart';
+import 'package:peto_care/services/auth/register/cubit/email_auth_cubit/register_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

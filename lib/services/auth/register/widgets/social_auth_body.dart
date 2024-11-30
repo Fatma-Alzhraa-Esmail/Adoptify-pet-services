@@ -1,5 +1,5 @@
-import 'package:peto_care/services/register/widgets/facebook_auth_widget.dart';
-import 'package:peto_care/services/register/widgets/google_auth_widget.dart';
+import 'package:peto_care/services/auth/register/widgets/facebook_auth_widget.dart';
+import 'package:peto_care/services/auth/register/widgets/google_auth_widget.dart';
 import 'package:flutter/material.dart';
 
 class SocialAuthBody extends StatelessWidget {

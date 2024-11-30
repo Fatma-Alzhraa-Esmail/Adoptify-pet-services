@@ -2,7 +2,7 @@ import 'package:peto_care/base/models/user_model.dart';
 import 'package:peto_care/handlers/shared_handler.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
-import 'package:peto_care/services/register/logic/google_auth_cubit/google_auth_state.dart';
+import 'package:peto_care/services/auth/register/cubit/google_auth_cubit/google_auth_state.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

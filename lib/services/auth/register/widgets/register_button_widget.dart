@@ -1,9 +1,10 @@
-import 'package:peto_care/services/register/logic/email_auth_cubit/register_cubit.dart';
-import 'package:peto_care/services/register/logic/email_auth_cubit/register_state.dart';
+import 'package:peto_care/services/auth/register/cubit/email_auth_cubit/register_cubit.dart';
+import 'package:peto_care/services/auth/register/cubit/email_auth_cubit/register_state.dart';
 import 'package:peto_care/utilities/components/custom_btn.dart';
 import 'package:peto_care/utilities/components/success_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peto_care/utilities/theme/text_styles.dart';
 
 class RegisterButtonWidget extends StatelessWidget {
   const RegisterButtonWidget({
@@ -25,7 +26,10 @@ class RegisterButtonWidget extends StatelessWidget {
           } else if (state is FormValidateState) {
             print(state.formValidate);
           } else if (state is RegisterSuccess) {
-            // bloc.isLoading = true;
+             showCustomDialog(context,
+                headerTitle: 'Congratulations!',
+                content:
+                    'Your account is ready to use, you will be redirected to the Home page in s few seconds.');
             showCustomDialog(context);
           } else if (state is RegisterFailure) {
             if (state.errorMessage == "User is found") {
@@ -42,7 +46,7 @@ class RegisterButtonWidget extends StatelessWidget {
                     strokeWidth: 6,
                     strokeCap: StrokeCap.round,
                   )
-                : Text('Sign Up'),
+                : Text('Sign Up',style: AppTextStyles.w600.copyWith(color: Colors.white)),
             buttonColor: !bloc.formVaildate
                 ? Colors.amber.withOpacity(0.4)
                 : Colors.amber,

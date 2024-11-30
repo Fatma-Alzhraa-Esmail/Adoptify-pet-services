@@ -9,8 +9,6 @@ import 'package:peto_care/services/home/widgets/services.dart';
 import 'package:peto_care/services/home/widgets/top_services.dart';
 import 'package:peto_care/utilities/components/component.dart';
 import 'package:peto_care/utilities/components/search.dart';
-
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,6 +17,8 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+           
             Container(
               height: 300,
               width: double.infinity,
