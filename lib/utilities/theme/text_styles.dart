@@ -29,12 +29,13 @@ abstract class AppTextStyles{
   /// - weight: w600
   /// - family: inter
   /// - color: black `(default)`
-  static const TextStyle w600 =  TextStyle(fontWeight: FontWeight.w600,color: Colors.black);
+  static const TextStyle w600 =  TextStyle(fontWeight: FontWeight.w600,color: Colors.black,height: 1.38,letterSpacing: 0.408);
 
   /// - weight: w700
   /// - family: inter
   /// - color: black `(default)`
   static const TextStyle w700 =  TextStyle(fontWeight: FontWeight.w700,color: Colors.black, fontSize: 26);
+  
 
   /// - weight: w800
   /// - family: inter
@@ -45,4 +46,6 @@ abstract class AppTextStyles{
   /// - family: inter
   /// - color: black `(default)`
   static const TextStyle w900 =  TextStyle(fontWeight: FontWeight.w900,color: Colors.black);
+
+
 }

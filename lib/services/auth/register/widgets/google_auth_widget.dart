@@ -1,6 +1,6 @@
 import 'package:peto_care/assets/assets.dart';
-import 'package:peto_care/services/register/logic/google_auth_cubit/google_auth_cubit.dart';
-import 'package:peto_care/services/register/logic/google_auth_cubit/google_auth_state.dart';
+import 'package:peto_care/services/auth/register/cubit/google_auth_cubit/google_auth_cubit.dart';
+import 'package:peto_care/services/auth/register/cubit/google_auth_cubit/google_auth_state.dart';
 import 'package:peto_care/utilities/components/social_button.dart';
 import 'package:peto_care/utilities/components/success_popup.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,10 @@ class GoogleAuthWidget extends StatelessWidget {
 
           }
           else if(state is GoogleAuthStateSuccess){
-                        showCustomDialog(context);
+                        showCustomDialog(context,
+                headerTitle: 'Congratulations!',
+                content:
+                    'Your account is ready to use, you will be redirected to the Home page in s few seconds.');
 
           }
         },

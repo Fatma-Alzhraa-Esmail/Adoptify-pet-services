@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peto_care/routers/routers.dart';
-import 'package:peto_care/services/Login/pages/login.dart';
+import 'package:peto_care/services/auth/Login/pages/login.dart';
 import 'package:peto_care/services/cart/pages/cart.dart';
 import 'package:peto_care/services/cart/pages/cart_edit.dart';
 import 'package:peto_care/services/cart/pages/complete_cart.dart';
@@ -14,7 +14,7 @@ import 'package:peto_care/services/myaccount/pages/settings.dart';
 import 'package:peto_care/services/servicesFeatures/pages/services_list_page.dart';
 import 'package:peto_care/services/shop/pages/shop_list.dart';
 import 'package:peto_care/services/verification_code/pages/phonenumberverfication.dart';
-import 'package:peto_care/services/register/pages/register.dart';
+import 'package:peto_care/services/auth/register/pages/register.dart';
 import 'package:peto_care/services/verification_code/pages/verviy.dart';
 import 'package:peto_care/services/home/pages/Navigation.dart';
 import 'package:peto_care/services/home/pages/home_page.dart';

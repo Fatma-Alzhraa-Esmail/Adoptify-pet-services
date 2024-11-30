@@ -11,6 +11,7 @@ class SharedKeys {
   String rememberMe = "REMEMBER_ME";
   String lang = "LANG";
   String theme = "THEME";
+  dynamic userData = "USER_DATA";
 }
 
 enum ValueType { int, string, bool, double, map }

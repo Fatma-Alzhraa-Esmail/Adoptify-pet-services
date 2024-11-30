@@ -1,5 +1,5 @@
-import 'package:peto_care/services/register/logic/google_auth_cubit/google_auth_cubit.dart';
-import 'package:peto_care/services/register/logic/google_auth_cubit/google_auth_state.dart';
+import 'package:peto_care/services/auth/register/cubit/google_auth_cubit/google_auth_cubit.dart';
+import 'package:peto_care/services/auth/register/cubit/google_auth_cubit/google_auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/services/myaccount/widget/listtilewidget.dart';

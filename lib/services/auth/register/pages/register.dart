@@ -1,10 +1,11 @@
-import 'package:peto_care/services/register/logic/email_auth_cubit/register_cubit.dart';
-import 'package:peto_care/services/register/logic/email_auth_cubit/register_state.dart';
-import 'package:peto_care/services/register/widgets/agree_terms_and_conditions_widget.dart';
-import 'package:peto_care/services/register/widgets/have_acount_widget.dart';
-import 'package:peto_care/services/register/widgets/phone_field_widget.dart';
-import 'package:peto_care/services/register/widgets/register_button_widget.dart';
-import 'package:peto_care/services/register/widgets/social_auth_body.dart';
+import 'package:peto_care/services/auth/register/cubit/email_auth_cubit/register_cubit.dart';
+import 'package:peto_care/services/auth/register/cubit/email_auth_cubit/register_state.dart';
+import 'package:peto_care/services/auth/register/widgets/agree_terms_and_conditions_widget.dart';
+import 'package:peto_care/services/auth/register/widgets/have_acount_widget.dart';
+import 'package:peto_care/services/auth/register/widgets/phone_field_widget.dart';
+import 'package:peto_care/services/auth/register/widgets/register_button_widget.dart';
+import 'package:peto_care/services/auth/register/widgets/social_auth_body.dart';
+import 'package:peto_care/utilities/components/success_popup.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class RegisterScreen extends StatelessWidget {
               bloc.formVaildate = state.formEmpty;
               print(bloc.formVaildate);
             }
+           
           },
           builder: (context, state) {
             var bloc = context.read<RegisterCubit>();
@@ -31,10 +33,11 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Column(
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -118,13 +121,15 @@ class RegisterScreen extends StatelessWidget {
                               ),
                              
                               SocialAuthBody(),
+                              Expanded(child: SizedBox(height: 10,)),
                              
                               HaveAccountWidget(),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
+                    
+                        )
+                      ],
+                       ),
                   ),
                 ],
               ),
