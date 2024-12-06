@@ -3,13 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ProductModel {
   final String id;
   final String? product_name;
+  final String? service_name;
   final DateTime? created_at;
   final String? description;
   final List<ColorsModel>? colors;
   final num? discount;
   final num? price;
+  final num? discountDuration;
   final List<String>? productInfo;
   final RatingModel? rating;
+  final DateTime? offer_end_date;
 
   ProductModel({
     required this.id,
@@ -21,15 +24,22 @@ class ProductModel {
     this.price,
     this.productInfo,
     this.rating,
+    this.service_name,
+    this.discountDuration,
+    this.offer_end_date,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       id: json['id'] ?? '',
       product_name: json['product_name'] ?? '',
+      service_name: json['service_name'] ?? '',
       description: json['description'] ?? '',
       created_at: json['created_at'] != null
           ? (json['created_at'] as Timestamp).toDate()
+          : null,
+      offer_end_date: json['offer_end_date'] != null
+          ? (json['offer_end_date'] as Timestamp).toDate()
           : null,
       // Convert List<dynamic> to List<String> for productInfo
       productInfo: json['productInfo'] != null
@@ -41,10 +51,12 @@ class ProductModel {
             )
           : [],
       discount: json['discount'] ?? 0,
-      price: json['price'] ?? 0,
+      price: json['price'] ?? 0.0,
       rating: json['rating'] != null
           ? RatingModel.fromJson(json['rating'])
           : null,
+
+          discountDuration: json['discountDuration'] ??0.0
     );
   }
 }
@@ -88,7 +100,7 @@ class RatingModel {
   }
 
   Map<String, dynamic> toJson() => {
-        "rate": rate ?? 0,
+        "rate": rate ?? 0.0,
         "rate_count": rate_count ?? 0,
       };
 }
