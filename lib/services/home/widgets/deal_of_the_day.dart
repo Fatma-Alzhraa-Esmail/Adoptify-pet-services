@@ -1,67 +1,102 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:peto_care/services/home/model/deal_of_the_day.dart';
+import 'package:peto_care/services/home/model/product_model.dart';
 
+class DealOFTheDayWidget extends StatefulWidget {
+  const DealOFTheDayWidget({
+    required this.productItem,
+    super.key,
+  });
+ final ProductModel productItem;
 
-Widget DealOfTheDayWidget(BuildContext context, DealOfTheDay dealOfTheDay) {
-  DateTime offerEndTime = DateTime.now().add(Duration(hours: dealOfTheDay.timer.toInt() ));
+  @override
+  State<DealOFTheDayWidget> createState() => _DealOFTheDayWidgetState();
+}
 
-  return Padding(
-    padding: const EdgeInsets.only(left: 15,bottom: 8,right: 15),
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-        boxShadow:[
-          BoxShadow(
+class _DealOFTheDayWidgetState extends State<DealOFTheDayWidget> {
+  @override
+  Widget build(BuildContext context) {
+    // DateTime offerEndTime =
+    //     DateTime.now().add(Duration(hours: (widget.productItem.discountDuration?? 24).toInt()));
+
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, bottom: 8, right: 15),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
                 color: Colors.grey.withOpacity(0.4),
                 spreadRadius: 1,
                 blurRadius: 1.4,
                 offset: Offset(0, 2),
               ),
-        ]
-      ),
-      //  width: 185,
-      height: 100,
-      child: Row(     
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Container(
-            width: 75,
-            height: 75,
-            child: Image.asset('${dealOfTheDay.image}',fit: BoxFit.cover,),),
-          ),
-          SizedBox(width: 25,),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
+            ]),
+        //  width: 185,
+        height: 100,
+        child: Row(
           children: [
-        Text('${dealOfTheDay.title}',style: TextStyle(fontWeight: FontWeight.w900,fontSize: 18),),
-        Row(
-
-          children: [
-            Text('\$${dealOfTheDay.new_price}',style: TextStyle(color:Color.fromARGB(255, 222, 174, 31),fontWeight: FontWeight.w700,fontSize: 15 ),),
-            SizedBox(width: 8,),
-            Text('\$${dealOfTheDay.price}',style: TextStyle(color:Colors.grey.shade600,fontWeight: FontWeight.w500 ,fontSize: 15,decoration: TextDecoration.lineThrough ),),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Container(
+                width: 75,
+                height: 75,
+                child: Image.network(
+                  widget.productItem.colors![0].images![0],
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 25,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${widget.productItem.product_name}',
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '\$${widget.productItem.price!*widget.productItem.discount!/100}',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 222, 174, 31),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      '\$${widget.productItem.price}',
+                      style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          decoration: TextDecoration.lineThrough),
+                    ),
+                  ],
+                ),
+                // Text('End in ${dealOfTheDay.timer}'),
+                OfferTimer(offerEndTime: widget.productItem.offer_end_date!),
+              ],
+            )
           ],
         ),
-        // Text('End in ${dealOfTheDay.timer}'),
-        OfferTimer(offerEndTime: offerEndTime),
-
-
-          ],
-        )
-        ],
       ),
-    ),
-  );
+    );
+  }
 }
+
 class OfferTimer extends StatefulWidget {
   final DateTime offerEndTime;
 
-   const OfferTimer({required this.offerEndTime});
+  const OfferTimer({required this.offerEndTime});
 
   @override
   _OfferTimerState createState() => _OfferTimerState();
@@ -99,7 +134,10 @@ class _OfferTimerState extends State<OfferTimer> {
   Widget build(BuildContext context) {
     return Text(
       'End in ${_formatDuration(_timeRemaining)}',
-      style: TextStyle(fontSize: 16, color: Colors.grey.shade500,fontWeight: FontWeight.w500),
+      style: TextStyle(
+          fontSize: 16,
+          color: Colors.grey.shade500,
+          fontWeight: FontWeight.w500),
     );
   }
 }

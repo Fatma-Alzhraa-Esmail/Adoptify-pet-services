@@ -103,6 +103,7 @@ class ProductsWidgets extends StatelessWidget {
                         },
                       ),
                     ),
+                   
                     Text(
                       '\$${product.price!.ceil()}',
                       style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17),

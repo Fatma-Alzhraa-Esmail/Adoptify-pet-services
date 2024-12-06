@@ -46,7 +46,7 @@ class MainFeatureCategoriesCubit extends Cubit<MainFeatureCategoriesState> {
 
   Future<void> fetchMainFeaturesCategoryAllProducts(
       {required String id}) async {
-    // subCategoriesLoading = true;
+    subCategoriesLoading = true;
 
     emit(MainFeaturesCategoriesAllProductsLoading());
     print("////id: $id");
@@ -72,7 +72,7 @@ class MainFeatureCategoriesCubit extends Cubit<MainFeatureCategoriesState> {
       print('Parsed Features: $features');
       String selectedCategory = features.first.id;
       emit(MainFeaturesCategoriesAllProductsLoaded(features, selectedCategory));
-      // subCategoriesLoading = false;
+      subCategoriesLoading = false;
     } catch (e) {
       print("Error fetching documents here: $e");
       emit(MainFeaturesCategoriesAllProductsError(e.toString()));
@@ -96,6 +96,7 @@ class MainFeatureCategoriesCubit extends Cubit<MainFeatureCategoriesState> {
           .doc(mainFeatureCategory)
           .collection('Products')
           .orderBy('created_at', descending: true)
+          
           .get();
 
       final products = querySnapshot.docs.map((doc) {
@@ -123,4 +124,8 @@ class MainFeatureCategoriesCubit extends Cubit<MainFeatureCategoriesState> {
     await fetchMainFeaturesProductsBasedCategory(
         mainFeature: id, mainFeatureCategory: categoryId ?? selectedCategory);
   }
+
+
+
+
 }
