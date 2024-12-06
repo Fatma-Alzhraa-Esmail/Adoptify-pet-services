@@ -5,6 +5,7 @@ import 'package:peto_care/services/cart/pages/cart.dart';
 import 'package:peto_care/services/cart/pages/cart_edit.dart';
 import 'package:peto_care/services/cart/pages/complete_cart.dart';
 import 'package:peto_care/services/cart/pages/shipping.dart';
+import 'package:peto_care/services/home/pages/main_feature_categories.dart';
 import 'package:peto_care/services/myaccount/pages/account_info.dart';
 import 'package:peto_care/services/myaccount/pages/add_new_address.dart';
 import 'package:peto_care/services/myaccount/pages/add_new_card.dart';
@@ -79,7 +80,11 @@ class CustomNavigator {
       //  return _pageRoute( ServicesFeature());
        return _pageRoute( ServicesPage());
       case Routes.shopFeature:
-       return _pageRoute( ShopFeature());
+         final args = settings.arguments as Map<String, dynamic>;
+  final id = args['id'] as String; // Extract 'id'
+  final selectedCategoryId = args['selectedCategoryId'] as String; // Extract 'selectedCategoryId'
+
+       return _pageRoute(MainFeatureCategories( id,selectedCategoryId));
       case Routes.addNewAddress:
        return _pageRoute( AddNewAddress());
       case Routes.settings:

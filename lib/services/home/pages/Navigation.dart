@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:peto_care/services/home/bloc/cubit.dart';
-import 'package:peto_care/services/home/bloc/state.dart';
+import 'package:peto_care/services/home/cubit/cubit.dart';
+import 'package:peto_care/services/home/cubit/state.dart';
 
 class NavigationScreen extends StatefulWidget {
   @override
