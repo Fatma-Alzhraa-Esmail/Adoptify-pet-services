@@ -1,89 +1,69 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:peto_care/routers/navigator.dart';
-import 'package:peto_care/routers/routers.dart';
+import 'package:peto_care/handlers/icon_handler.dart';
+import 'package:peto_care/utilities/theme/text_styles.dart';
 
-Widget Search() {
+class SearchWidget extends StatelessWidget {
+   SearchWidget({
+    super.key,
+  });
+
   final TextEditingController searchController = TextEditingController();
 
-  return Positioned(
-      top: 45,
-      left: 15,
-      right: 15,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: HexColor('#e8e4e3').withAlpha(100),
-                borderRadius: BorderRadius.circular(10.0)),
-            width: 300,
-            height: 45,
-            child: TextField(
-              cursorColor: Colors.white,
-              controller: searchController,
-              decoration: InputDecoration(
-                // border: Border(bottom: BorderSide(color: Colors.w)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white)),
-                hintText: 'Search',
-
-                fillColor: Colors.white,
-                focusColor: Colors.white,
-                hoverColor: Colors.white,
-                hintStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19,
-                    height: 2.7,
-                    fontWeight: FontWeight.w600),
-                // Add a clear button to the search bar
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.clear,
-                    color: Colors.white,
-                    size: 27,
-                  ),
-                  onPressed: () => searchController.clear(),
-                ),
-                // Add a search icon or button to the search bar
-                prefixIcon: IconButton(
-                  icon: Icon(
-                    Icons.search_sharp,
-                    color: Colors.white,
-                    size: 27,
-                  ),
-                  onPressed: () {
-                    // Perform the search here
-                  },
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+    
+      cursorColor: Colors.white,
+      controller: searchController,
+      style:AppTextStyles.w600, 
+      decoration: InputDecoration(
+        filled: true,
+        
+        // border: Border(bottom: BorderSide(color: Colors.w)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(10.0),
             ),
+        hintText: 'Search',
+        enabledBorder: OutlineInputBorder(
+             borderSide: BorderSide(color:const Color.fromARGB(94, 255, 255, 255) ),
+          borderRadius: BorderRadius.circular(10.0),),
+        fillColor: const Color.fromARGB(110, 255, 255, 255),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+         isDense: true,
+        focusColor: Colors.white,
+        
+        hoverColor: Colors.white,
+        hintStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 19,
+            height: 2.7,
+            fontWeight: FontWeight.w600),
+        
+           
+        // Add a clear button to the search bar
+        suffixIcon: IconButton(
+          icon: Icon(
+            Icons.clear,
+            color: Colors.white,
+            size: 27,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 7),
-            child: Icon(
-              CupertinoIcons.bell,
-              color: Colors.white,
-              size: 27,
-            ),
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          InkWell(
-            onTap: () {
-              CustomNavigator.push(Routes.cart);
-            },
-            child: Icon(
-              CupertinoIcons.cart,
-              color: Colors.white,
-              size: 27,
-            ),
-          ),
-        ],
-      ));
+          onPressed: () => searchController.clear(),
+        ),
+        // Add a search icon or button to the search bar
+        prefixIcon: IconButton(
+          icon:drawSvgIcon('search',iconColor: Colors.white,height: 21,width: 21),
+          onPressed: () {
+            // Perform the search here
+          },
+        ),
+        
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color:const Color.fromARGB(255, 255, 255, 255) ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        
+      ),
+    );
+  }
 }

@@ -45,7 +45,7 @@ class TipsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Search(),
+                  SearchWidget(),
                 ],
               ),
             ),

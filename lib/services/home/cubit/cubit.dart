@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:peto_care/services/home/bloc/state.dart';
+import 'package:peto_care/services/home/cubit/state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/services/home/model/deal_of_the_day.dart';
 import 'package:peto_care/services/home/model/hot_shop.dart';

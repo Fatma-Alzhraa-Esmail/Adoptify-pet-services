@@ -1,3 +1,5 @@
+import 'package:peto_care/assets/assets.dart';
+
 class TopServices {
   final String? image;
   final String? ServicesName;
@@ -21,7 +23,7 @@ class TopServices {
         
       ),
       TopServices(
-        image: 'assets/images/Trimming Hair.jpg',
+        image: Assets.assetsImagesTrimmingHair,
         ServicesName: 'service',
         n_rating: 2.368,
         price: 38,

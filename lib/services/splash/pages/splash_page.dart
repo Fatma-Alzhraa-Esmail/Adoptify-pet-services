@@ -34,8 +34,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       () {
         if (SharedHandler.instance!
             .getData(key: SharedKeys().isLogin, valueType: ValueType.bool)) {
-          CustomNavigator.push(Routes.onboarding);
-        } else {
+          CustomNavigator.push(Routes.Navigation);
+        }
+        else if(SharedHandler.instance!
+            .getData(key: SharedKeys().isRegister, valueType: ValueType.bool)){
+                        CustomNavigator.push(Routes.Navigation);
+
+            }
+         else {
           CustomNavigator.push(Routes.onboarding);
         }
       },
