@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/utilities/components/rating_widget.dart';
@@ -45,10 +46,15 @@ class HotShopWidget extends StatelessWidget {
             Container(
               width: 75,
               height: 75,
-              child: Image.network(
-                productItem.colors![0].images![0],
+              child: CachedNetworkImage(
+                imageUrl:  productItem.colors![0].images![0],
                 fit: BoxFit.cover,
+
               ),
+              // child: Image.network(
+              //   productItem.colors![0].images![0],
+              //   fit: BoxFit.cover,
+              // ),
             ),
             SizedBox(
               height: 7,

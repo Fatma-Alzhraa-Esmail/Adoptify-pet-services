@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
-import 'package:peto_care/services/home/cubit/mainFeatures/main_feature_cubit.dart';
-import 'package:peto_care/services/home/cubit/mainFeatures/main_feature_state.dart';
-import 'package:peto_care/services/home/cubit/main_faeture_categories/main_feature_categories_cubit.dart';
+import 'package:peto_care/services/home/manager/mainFeatures/main_feature_cubit.dart';
+import 'package:peto_care/services/home/manager/mainFeatures/main_feature_state.dart';
+import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
 import 'package:peto_care/services/home/model/main_features_model.dart';
 import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
 

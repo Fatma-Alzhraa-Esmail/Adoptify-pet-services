@@ -1,14 +1,18 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:peto_care/handlers/icon_handler.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
+import 'package:peto_care/utilities/theme/text_styles.dart';
 
 class DealOFTheDayWidget extends StatefulWidget {
   const DealOFTheDayWidget({
     required this.productItem,
     super.key,
   });
- final ProductModel productItem;
+  final ProductModel productItem;
 
   @override
   State<DealOFTheDayWidget> createState() => _DealOFTheDayWidgetState();
@@ -17,9 +21,6 @@ class DealOFTheDayWidget extends StatefulWidget {
 class _DealOFTheDayWidgetState extends State<DealOFTheDayWidget> {
   @override
   Widget build(BuildContext context) {
-    // DateTime offerEndTime =
-    //     DateTime.now().add(Duration(hours: (widget.productItem.discountDuration?? 24).toInt()));
-
     return Padding(
       padding: const EdgeInsets.only(left: 15, bottom: 8, right: 15),
       child: Container(
@@ -35,19 +36,44 @@ class _DealOFTheDayWidgetState extends State<DealOFTheDayWidget> {
               ),
             ]),
         //  width: 185,
-        height: 100,
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Container(
-                width: 75,
-                height: 75,
-                child: Image.network(
-                  widget.productItem.colors![0].images![0],
-                  fit: BoxFit.cover,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Transform.translate(
+                  offset: Offset(-6, -8),
+                  child: Stack(
+                    children: [
+                      drawSvgIcon(
+                        'label',
+                        iconColor: HexColor('#18d0ce'),
+                        height: 60,
+                        width: 60,
+                      ),
+                      Positioned(
+                          left: 14,
+                          top: 21,
+                          child: Text('${widget.productItem.discount}%',style: AppTextStyles.w500.copyWith(color: Colors.white,fontSize: 15),)),
+                    ],
+                  ),
                 ),
-              ),
+                Transform.translate(
+                   offset: Offset(0, -16),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      child: CachedNetworkImage(
+                       imageUrl: widget.productItem.colors![0].images![0],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               width: 25,
@@ -63,7 +89,7 @@ class _DealOFTheDayWidgetState extends State<DealOFTheDayWidget> {
                 Row(
                   children: [
                     Text(
-                      '\$${widget.productItem.price!*widget.productItem.discount!/100}',
+                      '\$${widget.productItem.price! * widget.productItem.discount! / 100}',
                       style: TextStyle(
                           color: Color.fromARGB(255, 222, 174, 31),
                           fontWeight: FontWeight.w700,

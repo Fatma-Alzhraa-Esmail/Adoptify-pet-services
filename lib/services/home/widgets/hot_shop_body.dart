@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:peto_care/services/home/cubit/product_cubit/product_cubit.dart';
+import 'package:peto_care/services/home/manager/hot_shop/hot_shop_cubit.dart';
+import 'package:peto_care/services/home/repo/home_repo_impl.dart';
 import 'package:peto_care/services/home/widgets/hot_shop.dart';
 import 'package:peto_care/utilities/components/component.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:peto_care/services/home/cubit/product_cubit/product_cubit.dart';
-import 'package:peto_care/services/home/widgets/hot_shop.dart';
-import 'package:peto_care/utilities/components/component.dart';
-
 class HotShopBody extends StatelessWidget {
   const HotShopBody({
     super.key,
@@ -17,22 +12,22 @@ class HotShopBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => ProductCubit()
-        ..fetchAllProducts(mainFeatureId: '1jhVopnJFqrORsXv5f0A'),
-      child: BlocConsumer<ProductCubit, ProductState>(
-        listener: (BuildContext context, ProductState state) {
-          ProductCubit allProductsCubit = context.read<ProductCubit>();
+      create: (BuildContext context) => HotShopCubit(HomeRepoImpl())
+        ..fetchHotShopProducts(mainFeatureId: '1jhVopnJFqrORsXv5f0A'),
+      child: BlocConsumer<HotShopCubit, HotShopState>(
+        listener: (BuildContext context, HotShopState state) {
+          HotShopCubit allProductsCubit = context.read<HotShopCubit>();
 
-          if (state is ProductsLoading) {
+          if (state is HotShopStateLoading) {
             // Handle loading state
-          } else if (state is ProductsLoaded) {
+          } else if (state is HotShopStateLoaded) {
             allProductsCubit.hotShopList = state.products;
-          } else if (state is ProductsError) {
+          } else if (state is HotShopStateError) {
             // Handle error state
           }
         },
-        builder: (BuildContext context, ProductState state) {
-          ProductCubit allProductsCubit = context.read<ProductCubit>();
+        builder: (BuildContext context, HotShopState state) {
+          HotShopCubit allProductsCubit = context.read<HotShopCubit>();
 
           return Column(
             children: [

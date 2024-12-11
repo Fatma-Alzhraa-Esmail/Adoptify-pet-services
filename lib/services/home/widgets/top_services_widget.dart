@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:peto_care/services/home/cubit/product_cubit/product_cubit.dart';
+import 'package:peto_care/services/home/manager/top_services/top_services_cubit.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/utilities/components/rating_widget.dart';
 import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
@@ -33,7 +34,7 @@ class TopServiceWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
                   
-                  image: NetworkImage(productItem.colors![0].images![0]),
+                  image: CachedNetworkImageProvider(productItem.colors![0].images![0]),
                   fit: BoxFit.cover,
                 )),
             child: Padding(
