@@ -5,7 +5,6 @@ import 'package:peto_care/services/auth/register/widgets/have_acount_widget.dart
 import 'package:peto_care/services/auth/register/widgets/phone_field_widget.dart';
 import 'package:peto_care/services/auth/register/widgets/register_button_widget.dart';
 import 'package:peto_care/services/auth/register/widgets/social_auth_body.dart';
-import 'package:peto_care/utilities/components/success_popup.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/text_styles.dart';
 import 'package:flutter/material.dart';

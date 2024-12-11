@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:peto_care/services/home/cubit/discount/discount_cubit.dart';
+import 'package:peto_care/services/home/manager/discount/discount_cubit.dart';
+import 'package:peto_care/services/home/repo/home_repo_impl.dart';
 import 'package:peto_care/services/home/widgets/deal_of_the_day.dart';
 import 'package:peto_care/utilities/components/component.dart';
-import 'package:peto_care/utilities/theme/media.dart';
-
 class DealOFDayBody extends StatelessWidget {
   const DealOFDayBody({
     super.key,
@@ -13,7 +12,7 @@ class DealOFDayBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (BuildContext context) => DiscountCubit()..fetchAllDiscountedProducts(),
+        create: (BuildContext context) => DiscountCubit(HomeRepoImpl())..fetchAllDiscountedProducts(),
         child: BlocConsumer<DiscountCubit, DiscountState>(
             listener: (BuildContext context, DiscountState state) {
           DiscountCubit discountCubit = context.read<DiscountCubit>();

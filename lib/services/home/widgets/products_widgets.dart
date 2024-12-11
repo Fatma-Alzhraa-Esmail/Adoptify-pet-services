@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:peto_care/handlers/icon_handler.dart';
-import 'package:peto_care/services/home/cubit/main_faeture_categories/main_feature_categories_cubit.dart';
+import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';

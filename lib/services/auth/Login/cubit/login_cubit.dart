@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:peto_care/base/models/user_model.dart';
-import 'package:peto_care/core/validator.dart';
+import 'package:peto_care/core/validator/validator.dart';
 import 'package:peto_care/handlers/shared_handler.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
@@ -52,10 +51,7 @@ class LoginCubit extends Cubit<LoginState> with Validations {
     try {
       isLoading = true;
       if (validate()) {
-        Map<String, dynamic> data = {
-          "email": emailcontroller.text,
-          "password": passwordcontroller.text
-        };
+       
         emit(LoginLoadingState());
 
         UserCredential user = await FirebaseAuth.instance

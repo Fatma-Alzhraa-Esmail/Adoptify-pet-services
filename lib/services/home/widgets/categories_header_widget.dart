@@ -1,10 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:peto_care/services/home/cubit/main_faeture_categories/main_feature_categories_cubit.dart';
+import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
 import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/media.dart';
-
 class CategoriesHeaderWidget extends StatelessWidget {
   const CategoriesHeaderWidget({
     super.key,
@@ -28,7 +27,6 @@ class CategoriesHeaderWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             final category =
                 mainFeatureCategoriesCubit.mainFeaturesCategoriesList[index];
-
             return GestureDetector(
               child: Container(
                 padding: EdgeInsets.all(6),
@@ -66,8 +64,8 @@ class CategoriesHeaderWidget extends StatelessWidget {
                           child: ShimmerLoading(
                         isLoading:
                             mainFeatureCategoriesCubit.subCategoriesLoading,
-                        child: SvgPicture.network(
-                          '${category.image}',
+                        child: CachedNetworkImage(
+                         imageUrl:category.image!,
                           width: 64,
                           height: 64,
                           fit: BoxFit.contain,

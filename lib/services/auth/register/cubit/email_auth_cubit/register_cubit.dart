@@ -1,5 +1,5 @@
 import 'package:peto_care/base/models/user_model.dart';
-import 'package:peto_care/core/validator.dart';
+import 'package:peto_care/core/validator/validator.dart';
 import 'package:peto_care/handlers/shared_handler.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
