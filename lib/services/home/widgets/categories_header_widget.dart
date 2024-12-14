@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
 import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
@@ -64,8 +65,8 @@ class CategoriesHeaderWidget extends StatelessWidget {
                           child: ShimmerLoading(
                         isLoading:
                             mainFeatureCategoriesCubit.subCategoriesLoading,
-                        child: CachedNetworkImage(
-                         imageUrl:category.image!,
+                        child: SvgPicture.network(
+                         category.image!,
                           width: 64,
                           height: 64,
                           fit: BoxFit.contain,

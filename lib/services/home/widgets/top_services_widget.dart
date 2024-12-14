@@ -59,7 +59,10 @@ class TopServiceWidget extends StatelessWidget {
                       Row(
                         children: [
                           RatingsWidget(
-                            productItem: productItem,
+                            rate: productItem.rating!.rate!,
+                             onDateSelected: (rate) async{
+                return rate;
+              },
                           ),
                           Text(
                             '(${productItem.rating!.rate} Ratings)',

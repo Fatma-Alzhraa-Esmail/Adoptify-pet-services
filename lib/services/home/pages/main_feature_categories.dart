@@ -40,6 +40,8 @@ class MainFeatureCategories extends StatelessWidget {
           ),
         ],
       ),
+      
+      
       body: CustomScrollView(
         slivers: [
           BlocProvider(
