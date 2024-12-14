@@ -4,7 +4,6 @@ import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class TextInputField extends StatefulWidget {
   TextInputField({
     super.key,
@@ -24,6 +23,7 @@ class TextInputField extends StatefulWidget {
     this.top_label_text,
     this.label,
     this.onTap,
+    this.borderType = BorderType.UnderLine,
   });
   final String? hintText;
   final String? errorText;
@@ -41,6 +41,7 @@ class TextInputField extends StatefulWidget {
   final String? top_label_text;
   final String? label;
   final Function()? onTap;
+  BorderType? borderType;
 
   @override
   State<TextInputField> createState() => _TextInputFieldState();
@@ -57,9 +58,13 @@ class _TextInputFieldState extends State<TextInputField> {
         child: showText
             ? Icon(
                 Icons.visibility,
-                color:widget.hasError?LightTheme().error: Colors.grey.shade400,
+                color:
+                    widget.hasError ? LightTheme().error : Colors.grey.shade400,
               )
-            : Icon(Icons.visibility_off, color:widget.hasError?LightTheme().error: Colors.grey.shade400),
+            : Icon(Icons.visibility_off,
+                color: widget.hasError
+                    ? LightTheme().error
+                    : Colors.grey.shade400),
         onTap: () {
           setState(() {
             showText = !showText;
@@ -84,12 +89,12 @@ class _TextInputFieldState extends State<TextInputField> {
       children: [
         TextFormField(
           style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              letterSpacing: 0.408,
-              height: 1.38,
-              ),
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 0.408,
+            height: 1.38,
+          ),
           cursorColor: LightTheme().mainColor,
           controller: widget.controller,
           initialValue: widget.controller != null ? null : widget.initialValue,
@@ -109,24 +114,61 @@ class _TextInputFieldState extends State<TextInputField> {
             });
           },
           decoration: InputDecoration(
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color:widget.hasError?LightTheme().error: Colors.grey.shade400, width: 1),
+            enabledBorder:widget.borderType == BorderType.UnderLine? UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: widget.hasError
+                      ? LightTheme().error
+                      : Colors.grey.shade400,
+                  width: 1),
+            ):OutlineInputBorder(
+               borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                  color: widget.hasError
+                      ? LightTheme().error
+                      : Colors.grey.shade400,
+                  width: 1),
             ),
-            border: UnderlineInputBorder(
+            border: widget.borderType == BorderType.UnderLine?
+            UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
+            ):OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.grey.shade400, width: 1),
             ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color:widget.hasError?LightTheme().error: LightTheme().mainColor, width: 1),
+            focusedBorder:widget.borderType! == BorderType.UnderLine? UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color: widget.hasError
+                      ? LightTheme().error
+                      : LightTheme().mainColor,
+                  width: 1),
+            ):OutlineInputBorder(
+               borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                
+                  color: widget.hasError
+                      ? LightTheme().error
+                      : LightTheme().mainColor,
+                  width: 1),
             ),
-            errorBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color:widget.hasError?LightTheme().error: LightTheme().error, width: 1),
+            errorBorder:widget.borderType! == BorderType.UnderLine? UnderlineInputBorder(
+              borderSide: BorderSide(
+                  color:
+                      widget.hasError ? LightTheme().error : LightTheme().error,
+                  width: 1),
+            ):UnderlineInputBorder(
+               borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                  color:
+                      widget.hasError ? LightTheme().error : LightTheme().error,
+                  width: 1),
             ),
             suffixIcon: widget.suffixIcon ?? _mapSuffixIcon(),
             suffixIconColor: Colors.grey,
             labelText: widget.label,
-            
             labelStyle: TextStyle(
-                color:widget.hasError?LightTheme().error: Colors.grey, fontSize: 16, fontWeight: FontWeight.w500),
+                color: widget.hasError ? LightTheme().error : Colors.grey,
+                fontSize: 16,
+                fontWeight: FontWeight.w500),
             hintText: widget.hintText,
             hintStyle: TextStyle(
                 color: Colors.grey[400],
@@ -144,13 +186,23 @@ class _TextInputFieldState extends State<TextInputField> {
         if (widget.hasError)
           Row(
             children: [
-              
               Text(widget.errorText ?? "Error",
-                  style: const TextStyle(color: Colors.red,fontSize: 12,fontWeight: FontWeight.w400,height: 1.38,letterSpacing: 0.408)),
+                  style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      height: 1.38,
+                      letterSpacing: 0.408)),
             ],
           ),
         if (widget.withBottomPadding) const SizedBox(height: 16),
       ],
     );
   }
+}
+
+enum BorderType {
+  Outline,
+  None,
+  UnderLine
 }

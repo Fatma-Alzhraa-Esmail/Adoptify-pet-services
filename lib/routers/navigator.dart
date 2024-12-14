@@ -5,6 +5,7 @@ import 'package:peto_care/services/cart/pages/cart.dart';
 import 'package:peto_care/services/cart/pages/cart_edit.dart';
 import 'package:peto_care/services/cart/pages/complete_cart.dart';
 import 'package:peto_care/services/cart/pages/shipping.dart';
+import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/home/pages/main_feature_categories.dart';
 import 'package:peto_care/services/myaccount/pages/account_info.dart';
 import 'package:peto_care/services/myaccount/pages/add_new_address.dart';
@@ -13,6 +14,7 @@ import 'package:peto_care/services/myaccount/pages/address.dart';
 import 'package:peto_care/services/myaccount/pages/history.dart';
 import 'package:peto_care/services/myaccount/pages/settings.dart';
 import 'package:peto_care/services/servicesFeatures/pages/services_list_page.dart';
+import 'package:peto_care/services/shop_product_details/pages/shop_product_details.dart';
 import 'package:peto_care/services/verification_code/pages/phonenumberverfication.dart';
 import 'package:peto_care/services/auth/register/pages/register.dart';
 import 'package:peto_care/services/verification_code/pages/verviy.dart';
@@ -96,6 +98,12 @@ class CustomNavigator {
        return _pageRoute( ShippingScreen());
       case Routes.completeCartInfo:
        return _pageRoute( CompletedCartInfo());
+      case Routes.shopProductDetails:
+      final args = settings.arguments as ProductModel;
+
+      final ProductModel productItemDetails = args; // Extract 'selectedCategoryId'
+
+       return _pageRoute( ShopProductDetails(productItemDetails: productItemDetails,));
 
     }
     return MaterialPageRoute(builder: (_) => Container());

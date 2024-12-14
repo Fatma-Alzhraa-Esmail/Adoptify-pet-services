@@ -45,7 +45,7 @@ class TopServiceBody extends StatelessWidget {
                           productItem:
                               allProductsCubit.topServicesProductsList[index],
                       allProductsCubit: allProductsCubit   ,    
-                        )),
+                        ),),
               ),
             ],
           ):Container();

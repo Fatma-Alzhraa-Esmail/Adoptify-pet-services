@@ -49,7 +49,7 @@ class HotShopWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl:  productItem.colors![0].images![0],
                 fit: BoxFit.cover,
-
+    
               ),
               // child: Image.network(
               //   productItem.colors![0].images![0],
@@ -66,7 +66,11 @@ class HotShopWidget extends StatelessWidget {
            
            Padding(
              padding: const EdgeInsets.symmetric(vertical: 6),
-             child: RatingsWidget(productItem: productItem,unratedColor: LightTheme().greyTitle,paddingBetweenIcons: 3,),
+             child: RatingsWidget(rate: productItem.rating!.rate!,unratedColor: LightTheme().greyTitle,paddingBetweenIcons: 3,
+              onDateSelected: (rate) async{
+                return rate;
+              },
+             ),
            ),
            
             Text(
