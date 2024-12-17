@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/routers/routers.dart';
 import 'package:peto_care/services/auth/Login/pages/login.dart';
 import 'package:peto_care/services/cart/pages/cart.dart';
 import 'package:peto_care/services/cart/pages/cart_edit.dart';
 import 'package:peto_care/services/cart/pages/complete_cart.dart';
 import 'package:peto_care/services/cart/pages/shipping.dart';
+import 'package:peto_care/services/favourites/pages/favourite_page.dart';
+import 'package:peto_care/services/home/model/main_features_model.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/home/pages/main_feature_categories.dart';
 import 'package:peto_care/services/myaccount/pages/account_info.dart';
@@ -14,6 +17,7 @@ import 'package:peto_care/services/myaccount/pages/address.dart';
 import 'package:peto_care/services/myaccount/pages/history.dart';
 import 'package:peto_care/services/myaccount/pages/settings.dart';
 import 'package:peto_care/services/servicesFeatures/pages/services_list_page.dart';
+import 'package:peto_care/services/shop_product_details/manger/shop_product_details_cubit.dart';
 import 'package:peto_care/services/shop_product_details/pages/shop_product_details.dart';
 import 'package:peto_care/services/verification_code/pages/phonenumberverfication.dart';
 import 'package:peto_care/services/auth/register/pages/register.dart';
@@ -32,9 +36,12 @@ const curve = Curves.easeInOut;
 var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
 class CustomNavigator {
-  static final GlobalKey<NavigatorState> navigatorState = GlobalKey<NavigatorState>();
-  static final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
-  static final GlobalKey<ScaffoldMessengerState> scaffoldState = GlobalKey<ScaffoldMessengerState>();
+  static final GlobalKey<NavigatorState> navigatorState =
+      GlobalKey<NavigatorState>();
+  static final RouteObserver<PageRoute> routeObserver =
+      RouteObserver<PageRoute>();
+  static final GlobalKey<ScaffoldMessengerState> scaffoldState =
+      GlobalKey<ScaffoldMessengerState>();
 
   static _pageRoute(Widget screen) => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => screen,
@@ -49,62 +56,67 @@ class CustomNavigator {
   static Route<dynamic> onCreateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.login:
-        return _pageRoute( LoginScreen());
+        return _pageRoute(LoginScreen());
       case Routes.splash:
         return _pageRoute(const SplashPage());
-     
+
       case Routes.home:
-        return _pageRoute( HomePage());
+        return _pageRoute(HomePage());
       case Routes.onboarding:
-       return _pageRoute( OnboardingScreen());
+        return _pageRoute(OnboardingScreen());
       case Routes.register:
-       return _pageRoute( RegisterScreen());
+        return _pageRoute(RegisterScreen());
       case Routes.verfication:
-       return _pageRoute( VerifyPhoneScreen());
+        return _pageRoute(VerifyPhoneScreen());
       case Routes.phone:
-       return _pageRoute( phone());
+        return _pageRoute(phone());
       case Routes.Navigation:
-       return _pageRoute( NavigationScreen());
+        return _pageRoute(NavigationScreen());
       case Routes.Tips:
-       return _pageRoute( TipsScreen());
+        return _pageRoute(TipsScreen());
       case Routes.account:
-       return _pageRoute( AccountScreen());
+        return _pageRoute(AccountScreen());
       case Routes.accountInfo:
-       return _pageRoute( AccountInfo());
+        return _pageRoute(AccountInfo());
       case Routes.addnewpaymentCard:
-       return _pageRoute( AddNewCard());
+        return _pageRoute(AddNewCard());
       case Routes.address:
-       return _pageRoute( Address());
+        return _pageRoute(Address());
       case Routes.history:
-       return _pageRoute( History());
+        return _pageRoute(History());
       case Routes.servicesFeature:
-      //  return _pageRoute( ServicesFeature());
-       return _pageRoute( ServicesPage());
+        //  return _pageRoute( ServicesFeature());
+        return _pageRoute(ServicesPage());
       case Routes.shopFeature:
-         final args = settings.arguments as Map<String, dynamic>;
-  final id = args['id'] as String; // Extract 'id'
-  final selectedCategoryId = args['selectedCategoryId'] as String; // Extract 'selectedCategoryId'
-
-       return _pageRoute(MainFeatureCategories( id,selectedCategoryId));
+        final args = settings.arguments as Map<String, dynamic>;
+        final id = args['id'] as String; // Extract 'id'
+        final maniCategory = args['maniCategory'] as MainFeaturesModel; // Extract 'id'
+        final selectedCategoryId = args['selectedCategoryId']
+            as String; // Extract 'selectedCategoryId'
+       
+        return _pageRoute(MainFeatureCategories(id, selectedCategoryId,maniCategory));
       case Routes.addNewAddress:
-       return _pageRoute( AddNewAddress());
+        return _pageRoute(AddNewAddress());
       case Routes.settings:
-       return _pageRoute( SettingsScreen());
+        return _pageRoute(SettingsScreen());
       case Routes.cart:
-       return _pageRoute( CartScreen());
+        return _pageRoute(CartScreen());
       case Routes.cartEdit:
-       return _pageRoute( CartEditScreen());
+        return _pageRoute(CartEditScreen());
       case Routes.shipping:
-       return _pageRoute( ShippingScreen());
+        return _pageRoute(ShippingScreen());
       case Routes.completeCartInfo:
-       return _pageRoute( CompletedCartInfo());
+        return _pageRoute(CompletedCartInfo());
       case Routes.shopProductDetails:
-      final args = settings.arguments as ProductModel;
+        final args = settings.arguments as ProductModel;
 
-      final ProductModel productItemDetails = args; // Extract 'selectedCategoryId'
-
-       return _pageRoute( ShopProductDetails(productItemDetails: productItemDetails,));
-
+        final ProductModel productItemDetails =
+            args; // Extract 'selectedCategoryId'
+        return _pageRoute(ShopProductDetails(
+          productItemDetails: productItemDetails,
+        ));
+      case Routes.FavouriteScreen:
+        return _pageRoute(FavouritePage());
     }
     return MaterialPageRoute(builder: (_) => Container());
   }
@@ -115,13 +127,18 @@ class CustomNavigator {
     }
   }
 
-  static push(String routeName, {arguments, bool replace = false, bool clean = false}) {
+  static push(String routeName,
+      {arguments, bool replace = false, bool clean = false}) {
     if (clean) {
-      return navigatorState.currentState!.pushNamedAndRemoveUntil(routeName, (_) => false, arguments: arguments);
+      return navigatorState.currentState!.pushNamedAndRemoveUntil(
+          routeName, (_) => false,
+          arguments: arguments);
     } else if (replace) {
-      return navigatorState.currentState!.pushReplacementNamed(routeName, arguments: arguments);
+      return navigatorState.currentState!
+          .pushReplacementNamed(routeName, arguments: arguments);
     } else {
-      return navigatorState.currentState!.pushNamed(routeName, arguments: arguments);
+      return navigatorState.currentState!
+          .pushNamed(routeName, arguments: arguments);
     }
   }
 }

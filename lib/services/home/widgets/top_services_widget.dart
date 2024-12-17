@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:peto_care/services/cart/widget/add_remove_from_Favourite_widget.dart';
+import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/home/manager/top_services/top_services_cubit.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/utilities/components/rating_widget.dart';
@@ -40,9 +42,19 @@ class TopServiceWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Row(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white.withAlpha(160),
+                      child: Center(child: AddRemoveFromFavouriteWidget(productItem: productItem,padding: EdgeInsets.all(0),iconSize: 26,featureType: FeatureType.Service,)),
+                    ),
+                  ),
+                 Column(
+                  children: [
+                     Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('${productItem.product_name}',
@@ -65,7 +77,7 @@ class TopServiceWidget extends StatelessWidget {
               },
                           ),
                           Text(
-                            '(${productItem.rating!.rate} Ratings)',
+                            '(${productItem.rating!.rate_count} Ratings)',
                             style: AppTextStyles.w600BoxShadow.copyWith(
                                 fontSize: 15, fontWeight: FontWeight.w500),
                           ),
@@ -81,6 +93,8 @@ class TopServiceWidget extends StatelessWidget {
                   SizedBox(
                     height: 12,
                   )
+                  ],
+                 )
                 ],
               ),
             ),

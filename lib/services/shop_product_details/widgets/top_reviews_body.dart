@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:peto_care/base/manger/user/user_cubit.dart';
 import 'package:peto_care/base/repo/user_repo_impl.dart';
 import 'package:peto_care/services/shop_product_details/manger/reivew_cubit/reviews_cubit.dart';
-import 'package:peto_care/services/shop_product_details/repo/review_repo_impl.dart';
 import 'package:peto_care/utilities/components/rating_widget.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/text_styles.dart';

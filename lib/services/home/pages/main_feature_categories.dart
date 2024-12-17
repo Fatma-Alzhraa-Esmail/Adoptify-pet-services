@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
+import 'package:peto_care/services/home/model/main_features_model.dart';
 import 'package:peto_care/services/home/widgets/categories_header_widget.dart';
 import 'package:peto_care/services/home/widgets/products_widgets.dart';
 import 'package:peto_care/utilities/theme/media.dart';
@@ -8,11 +9,12 @@ import 'package:peto_care/utilities/theme/media.dart';
 class MainFeatureCategories extends StatelessWidget {
   const MainFeatureCategories(
     this.id,
-    this.selectedCategoryId, {
+    this.selectedCategoryId, this.maniCategory,{
     super.key,
   });
   final String id;
   final String selectedCategoryId;
+  final MainFeaturesModel maniCategory;
   @override
   Widget build(BuildContext context) {
     print("hereeeee223 id: $id   hereeeee223 id: $selectedCategoryId");
@@ -25,7 +27,7 @@ class MainFeatureCategories extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Shop',
+          '${maniCategory.main_feature_name}',
         ),
         actions: [
           Padding(

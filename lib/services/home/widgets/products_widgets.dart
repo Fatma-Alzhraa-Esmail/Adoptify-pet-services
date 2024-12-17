@@ -3,6 +3,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:peto_care/handlers/icon_handler.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
+import 'package:peto_care/services/cart/widget/add_remove_from_Favourite_widget.dart';
+import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
@@ -33,7 +35,8 @@ class ProductsWidgets extends StatelessWidget {
           itemBuilder: (context, index) {
             ProductModel product = mainFeatureCategoriesCubit.products[index];
             return GestureDetector(
-              onTap: () => CustomNavigator.push(Routes.shopProductDetails,arguments:product ),
+              onTap: () => CustomNavigator.push(Routes.shopProductDetails,
+                  arguments: product),
               child: Padding(
                 padding: const EdgeInsets.only(left: 7.5, right: 7.5),
                 child: Container(
@@ -59,16 +62,14 @@ class ProductsWidgets extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            InkWell(
-                                child: Icon(
-                              Icons.favorite_border,
-                              color: Colors.black,
-                            )),
+                           AddRemoveFromFavouriteWidget(productItem: product,featureType: FeatureType.Shop)
+                        
+                        
                           ],
                         ),
                       ),
                       ShimmerLoading(
-                        isLoading:mainFeatureCategoriesCubit.productsLoading ,
+                        isLoading: mainFeatureCategoriesCubit.productsLoading,
                         child: Container(
                           width: 75,
                           height: 75,
@@ -83,7 +84,8 @@ class ProductsWidgets extends StatelessWidget {
                       ),
                       Text(
                         product.product_name!,
-                        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 18),
                       ),
                       ShimmerLoading(
                         isLoading: mainFeatureCategoriesCubit.productsLoading,
@@ -98,19 +100,20 @@ class ProductsWidgets extends StatelessWidget {
                           itemPadding: EdgeInsets.symmetric(horizontal: 1.5),
                           itemBuilder: (context, index) {
                             return index < product.rating!.rate!
-                                ? drawSvgIcon('star',iconColor: LightTheme().mainColor)
-                                : drawSvgIcon('star_outline',iconColor: LightTheme().mainColor);
-                          
+                                ? drawSvgIcon('star',
+                                    iconColor: LightTheme().mainColor)
+                                : drawSvgIcon('star_outline',
+                                    iconColor: LightTheme().mainColor);
                           },
                           onRatingUpdate: (rating) {
                             print(rating);
                           },
                         ),
                       ),
-                     
                       Text(
                         '\$${product.price!.ceil()}',
-                        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 17),
                       )
                     ],
                   ),
