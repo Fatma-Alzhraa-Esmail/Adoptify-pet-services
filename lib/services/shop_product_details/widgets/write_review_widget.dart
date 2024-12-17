@@ -41,13 +41,13 @@ class WriteReviewWidget extends StatelessWidget {
             key: SharedKeys().user,
             valueType: ValueType
                 .string); // Replace with actual logic to get the user's ID
-    
+
         // Check if a review exists for the current user
         final hasUserReview = reviewsCubit.ReviewsList.any(
           (review) => review.user_id == currentUserId,
         );
-    
-        if (hasUserReview && reviewsCubit.isEdit==false) {
+
+        if (hasUserReview && reviewsCubit.isEdit == false) {
           ReviewModel? userReview = reviewsCubit.ReviewsList.firstWhere(
             (review) => review.user_id == currentUserId,
           );
@@ -63,8 +63,8 @@ class WriteReviewWidget extends StatelessWidget {
               ],
               firstChild: Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10, horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,15 +82,14 @@ class WriteReviewWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
-                                    foregroundImage:
-                                        state.userData.image == ""
-                                            ? NetworkImage(
+                                    foregroundImage: state.userData.image == ""
+                                        ? NetworkImage(
+                                            'https://firebasestorage.googleapis.com/v0/b/test-project-42c06.appspot.com/o/user.jpeg?alt=media&token=c8fb2e3f-24b1-40bf-98a5-93872f9b37f7',
+                                          )
+                                        : NetworkImage(
+                                            state.userData.image ??
                                                 'https://firebasestorage.googleapis.com/v0/b/test-project-42c06.appspot.com/o/user.jpeg?alt=media&token=c8fb2e3f-24b1-40bf-98a5-93872f9b37f7',
-                                              )
-                                            : NetworkImage(
-                                                state.userData.image ??
-                                                    'https://firebasestorage.googleapis.com/v0/b/test-project-42c06.appspot.com/o/user.jpeg?alt=media&token=c8fb2e3f-24b1-40bf-98a5-93872f9b37f7',
-                                              ),
+                                          ),
                                     radius: 24,
                                   ),
                                   SizedBox(
@@ -99,8 +98,7 @@ class WriteReviewWidget extends StatelessWidget {
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
                                         state.userData?.name ?? "",
@@ -108,8 +106,8 @@ class WriteReviewWidget extends StatelessWidget {
                                       ),
                                       Text(
                                         userReview.created_at != null
-                                            ? timeago.format(
-                                                userReview.created_at!)
+                                            ? timeago
+                                                .format(userReview.created_at!)
                                             : "No date available",
                                         style: AppTextStyles.w600.copyWith(
                                           fontSize: 14,
@@ -138,7 +136,7 @@ class WriteReviewWidget extends StatelessWidget {
                   ),
                 ),
               ),
-    
+
               showArrowWidget: false,
               secondChild: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -158,8 +156,7 @@ class WriteReviewWidget extends StatelessWidget {
                             height: 90, // Constraint ListView's height
                             child: ListView.separated(
                               shrinkWrap: false,
-                              padding:
-                                  const EdgeInsets.only(left: 56, top: 16),
+                              padding: const EdgeInsets.only(left: 56, top: 16),
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, imageIndex) => ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
@@ -182,10 +179,8 @@ class WriteReviewWidget extends StatelessWidget {
                       child: CustomBtn(
                         onTap: () {
                           reviewsCubit.askToEditReview(
-                            comment: userReview.comment??"",
-                            currentRate: userReview.user_rate??0.0
-    
-                          );
+                              comment: userReview.comment ?? "",
+                              currentRate: userReview.user_rate ?? 0.0);
                         },
                         text: Text(
                           "Edit Review",
@@ -305,22 +300,23 @@ class WriteReviewWidget extends StatelessWidget {
                       builder: (context, state) {
                         ShopProductDetailsCubit shopProductDetailsCubit =
                             context.read<ShopProductDetailsCubit>();
-                             ReviewModel? userReview = reviewsCubit.ReviewsList.firstWhere(
-            (review) => review.user_id == currentUserId,
-          );
+                        ReviewModel? userReview =
+                            reviewsCubit.ReviewsList.firstWhere(
+                          (review) => review.user_id == currentUserId,
+                        );
                         return CustomBtn(
                           onTap: () async {
                             await shopProductDetailsCubit.updateTotalRate(
                                 productItem: productDetails,
                                 rate: reviewsCubit.rate);
-                           if(reviewsCubit.isEdit==false){
-                             await reviewsCubit.addReview(
-                                productId: productDetails);
-                           }else{
-    
-                             await reviewsCubit.updateReview(productItem: productDetails,
-                              reviewItem:userReview );
-                           }
+                            if (reviewsCubit.isEdit == false) {
+                              await reviewsCubit.addReview(
+                                  productId: productDetails);
+                            } else {
+                              await reviewsCubit.updateReview(
+                                  productItem: productDetails,
+                                  reviewItem: userReview);
+                            }
                           },
                           text: Text(
                             reviewsCubit.isEdit ? "Save" : "Submit Review",

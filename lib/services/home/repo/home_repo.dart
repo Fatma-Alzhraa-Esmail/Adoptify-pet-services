@@ -7,4 +7,5 @@ abstract class HomeRepo {
   Future<Either<Failure, List<MainFeaturesModel>>> fetchMainFeatures();
   Future<Either<Failure, List<ProductModel>>> fetchPopularProducts({required String mainFeatureId});
   Future<Either<Failure, List<ProductModel>>> fetchDealOfDayProducts();
+
 }

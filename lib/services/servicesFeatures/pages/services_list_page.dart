@@ -40,9 +40,7 @@ class _ServicesPageState extends State<ServicesPage> {
           'Services',
           // style: AppTextStyles.w700.copyWith(fontSize: 20),
         ),
-        // centerTitle: true,
-        // backgroundColor: Colors.transparent,
-        // elevation: 0,
+       
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 14),

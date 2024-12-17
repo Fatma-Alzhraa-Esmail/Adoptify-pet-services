@@ -57,6 +57,7 @@ class HotShopBody extends StatelessWidget {
                   },
                 ),
               ),
+          
             ],
           );
         },

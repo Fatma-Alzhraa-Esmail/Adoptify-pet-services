@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:peto_care/utilities/theme/text_styles.dart';
 
 class ProfileOtherServices extends StatelessWidget {
   const ProfileOtherServices(
       {super.key,
       this.ontap,
-       this.leading,
-       this.trailing,
+      this.leading,
+      this.trailing,
       required this.title});
   final Function()? ontap;
   final Widget? leading;
@@ -18,17 +19,13 @@ class ProfileOtherServices extends StatelessWidget {
       children: [
         ListTile(
           onTap: ontap,
-          leading: leading ,
-          title: Text(title),
+          leading: leading,
+          title: Text(
+            title,
+            style: AppTextStyles.w500,
+          ),
           trailing: trailing,
-          horizontalTitleGap: 3,
-        
-          // titleTextStyle: TextStyle(
-          //   fontWeight: FontWeight.w600,
-          //   color: Colors.black,
-          //   fontSize: 18,
-          // ),
-          // dense: true,
+          horizontalTitleGap: 10,
         ),
         Divider(
           height: 1,

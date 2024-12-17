@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:peto_care/services/cart/bloc/cart_cubit.dart';
-import 'package:peto_care/services/cart/bloc/cart_state.dart';
+import 'package:peto_care/services/cart/manger/cart/cart_cubit.dart';
+import 'package:peto_care/services/cart/repo/cart_repo_impl.dart';
+
 import 'package:peto_care/services/cart/widget/color_select_button.dart';
 
 class EditCartProductWidget extends StatefulWidget {
@@ -104,7 +105,7 @@ class _CartProductWidgetState extends State<EditCartProductWidget> {
                         }),
                       ),
                       BlocProvider(
-                        create: (BuildContext context) => CartCubit(),
+                        create: (BuildContext context) => CartCubit(CartRepoImpl()),
                         child: BlocBuilder<CartCubit, CartState>(
                           builder: (context, state) {
                             var bloc = BlocProvider.of<CartCubit>(context);
@@ -115,7 +116,6 @@ class _CartProductWidgetState extends State<EditCartProductWidget> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      bloc.remove();
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -133,7 +133,7 @@ class _CartProductWidgetState extends State<EditCartProductWidget> {
                                     ),
                                   ),
                                   Text(
-                                    "${bloc.counter}",
+                                    "",
                                     style: TextStyle(
                                         color: Colors.amber,
                                         fontSize: 16,
@@ -141,7 +141,6 @@ class _CartProductWidgetState extends State<EditCartProductWidget> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      bloc.add();
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),

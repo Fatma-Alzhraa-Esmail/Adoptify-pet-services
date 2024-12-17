@@ -6,6 +6,7 @@ import 'package:peto_care/services/myaccount/bloc/cubit.dart';
 import 'package:peto_care/services/myaccount/bloc/state.dart';
 import 'package:peto_care/services/myaccount/widget/complete_profile.dart';
 import 'package:peto_care/services/myaccount/widget/listtilewidget.dart';
+import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -149,10 +150,13 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                size: 26,
+                color: LightTheme().borderColor,
+                size: 24,
               ),
               title: 'Favourite',
-              ontap: () {},
+              ontap: () {
+                CustomNavigator.push(Routes.FavouriteScreen);
+              },
             ),
             ProfileOtherServices(
               leading: Icon(
@@ -162,7 +166,8 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                size: 26,
+                color: LightTheme().borderColor,
+                size: 24,
               ),
               title: 'Transform Details',
               ontap: () {},
@@ -175,7 +180,8 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                size: 26,
+                color: LightTheme().borderColor,
+                size: 24,
               ),
               title: 'Settings',
               ontap: () {
@@ -190,7 +196,8 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                size: 26,
+                color: LightTheme().borderColor,
+                size: 24,
               ),
               title: 'Help Center',
               ontap: () {},
@@ -203,7 +210,8 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                size: 26,
+                color: LightTheme().borderColor,
+                size: 24,
               ),
               title: 'About Us',
               ontap: () {},

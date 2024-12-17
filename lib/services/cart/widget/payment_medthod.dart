@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:peto_care/services/cart/bloc/cart_cubit.dart';
-import 'package:peto_care/services/cart/bloc/cart_state.dart';
+import 'package:peto_care/services/cart/manger/cart/cart_cubit.dart';
+import 'package:peto_care/services/cart/repo/cart_repo_impl.dart';
 import 'package:peto_care/utilities/components/custom_btn.dart';
 import 'package:peto_care/utilities/theme/media.dart';
 
@@ -23,7 +23,7 @@ class _CartPaymentState extends State<CartPayment> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: BlocProvider(
-            create: (BuildContext context) => CartCubit(),
+            create: (BuildContext context) => CartCubit(CartRepoImpl()),
             child: BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
                 return Container(

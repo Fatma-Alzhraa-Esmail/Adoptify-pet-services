@@ -15,11 +15,13 @@ class CustomBtn extends StatelessWidget {
       this.onTap,
       this.borderColor,this.textContent,
       this.isFeedback,
+      this.borderWidth
       });
 
   final double? height;
   final double? width;
   final double? radius;
+  final double? borderWidth;
   final Widget? text;
   final String? textContent;
   final Color? buttonColor;
@@ -43,7 +45,7 @@ class CustomBtn extends StatelessWidget {
         decoration: BoxDecoration(
           color: buttonColor ?? themeBloc.theme.valueOrNull!.primary,
           borderRadius: BorderRadius.circular(radius ?? 8),
-          border: Border.all(color: borderColor ?? Colors.amber)
+          border: Border.all(color: borderColor ?? Colors.amber,width: borderWidth??1)
         ),
         child: Center(
           child:text?? Text(

@@ -62,9 +62,11 @@ Widget MainFeaturesWidget(
                     id: mainFeatureItem.id);
 
                 await CustomNavigator.push(Routes.shopFeature, arguments: {
+
                   'id': mainFeatureItem.id,
                   'selectedCategoryId':
                       mainFeaturesCategoriesCubit.selectedCategory,
+                  'maniCategory':mainFeatureItem    
                 });
               },
               child: Container(
