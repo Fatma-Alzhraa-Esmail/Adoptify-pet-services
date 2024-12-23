@@ -139,9 +139,10 @@ class RegisterCubit extends Cubit<RegisterState> with Validations {
         emit(RegisterFailure(errorMessage: passwordError));
       }
     } catch (e) {
-      isLoading = false;
+      
       emit(
           RegisterFailure(errorMessage: 'There was an error please try again'));
+          isLoading = false;
     }
   }
 

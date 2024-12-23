@@ -6,7 +6,8 @@ import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/favourites/repo/favourite_repo_impl.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/home/widgets/hot_shop.dart';
-import 'package:peto_care/services/shop_product_details/widgets/services_list_widget.dart';
+import 'package:peto_care/services/servicesFeatures/widget/service_widget.dart';
+import 'package:peto_care/services/tips/widget/popular_tips_widget.dart';
 import 'package:peto_care/utilities/components/custom_btn.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/media.dart';
@@ -57,31 +58,35 @@ class FavouritePage extends StatelessWidget {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
                       child: Row(
                         children: favouriteCubit.groupedFavorites.keys
                             .map((featureType) {
                           return Padding(
                             padding: const EdgeInsets.only(right: 16),
                             child: CustomBtn(
-                              width: MediaHelper.width*2/7,
-                              text:Text(featureType,style:AppTextStyles.w600.copyWith(
-                                fontSize: 16,
-                                color:featureType ==
-                                        favouriteCubit.selectedFeatureType?LightTheme().background:LightTheme().mainColor) ),
-                          
-                               buttonColor: featureType ==
-                                        favouriteCubit.selectedFeatureType?LightTheme().mainColor:LightTheme().background,
-                             height: 40,
-                             radius: 8,
-                             borderWidth: 1.7,
+                              width: MediaHelper.width * 2 / 7,
+                              text: Text(featureType,
+                                  style: AppTextStyles.w600.copyWith(
+                                      fontSize: 16,
+                                      color: featureType ==
+                                              favouriteCubit.selectedFeatureType
+                                          ? LightTheme().background
+                                          : LightTheme().mainColor)),
+                              buttonColor: featureType ==
+                                      favouriteCubit.selectedFeatureType
+                                  ? LightTheme().mainColor
+                                  : LightTheme().background,
+                              height: 40,
+                              radius: 8,
+                              borderWidth: 1.7,
                               onTap: () {
-                                  context
+                                context
                                     .read<FavouriteCubit>()
                                     .selectFeatureType(featureType);
                               },
                             ),
-                            
                           );
                         }).toList(),
                       ),
@@ -167,7 +172,7 @@ class FavouritePage extends StatelessWidget {
                                         if (state
                                             is FetchProductDetailsLoadedState) {
                                           ProductModel item = state.productItem;
-                                          return ServicesListWidget(item: item);
+                                          return ServicesWidget(item: item);
                                         }
                                         return Container();
                                       },
@@ -176,7 +181,49 @@ class FavouritePage extends StatelessWidget {
                                 },
                               ),
                             )
-                          : Container(),
+                          : favouriteCubit.selectedFeatureType ==
+                                  FeatureType.Tips.name
+                              ? GridView.builder(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 13, horizontal: 14),
+                                  itemCount: favouriteCubit
+                                          .groupedFavorites[favouriteCubit
+                                              .selectedFeatureType]
+                                          ?.length ??
+                                      0,
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          childAspectRatio: 2 / 1.9,
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 15.0,
+                                          mainAxisSpacing: 15.0),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    var item = favouriteCubit.groupedFavorites[
+                                        favouriteCubit
+                                            .selectedFeatureType]![index];
+                                    return BlocProvider(
+                                      create: (context) =>
+                                          FavouriteCubit(FavouriteRepoImpl())
+                                            ..fetchTipsDetails(
+                                                docRef: item.docRef),
+                                      child: BlocBuilder<FavouriteCubit,
+                                          FavouriteState>(
+                                        builder: (context, state) {
+                                          if (state
+                                              is FetchTipsDetailsLoadedState) {
+                                             return PopularTipsWidget(
+                                            tipsItem: state.tipItem);
+                                          }
+                                          return Container();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Container(),
                 ],
               ),
             );

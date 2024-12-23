@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:peto_care/core/errors/failure.dart';
 import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
+import 'package:peto_care/services/tips/model/tips_model.dart';
 
 abstract class FavouriteRepo {
   Future<Either<Failure, void>> addToFavourite(
@@ -15,5 +16,7 @@ abstract class FavouriteRepo {
     required String userId,
   });
   Future<Either<Failure, ProductModel>> fetchProductDetails(
+      {required DocumentReference docRef});
+       Future<Either<Failure, TipsModel>> fetchTipsDetails(
       {required DocumentReference docRef});
 }

@@ -1,12 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:peto_care/services/tips/model/popular_tips.dart';
+import 'package:peto_care/services/cart/widget/add_remove_from_Favourite_widget.dart';
+import 'package:peto_care/services/favourites/model/favourite_model.dart';
+import 'package:peto_care/services/tips/model/tips_model.dart';
 import 'package:peto_care/utilities/theme/media.dart';
 
-Widget PopularTipsWidget(BuildContext context, PopularTips popularTips) {
-  return Container(
-    width: MediaHelper.width,
-    child: Padding(
-      padding: EdgeInsets.only(left: 20, top: 8, bottom: 8, right: 20),
+class PopularTipsWidget extends StatelessWidget {
+  const PopularTipsWidget({
+    super.key,
+    required this.tipsItem
+  });
+  final TipsModel tipsItem;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaHelper.width,
       child: Column(
         children: [
           Container(
@@ -23,7 +31,8 @@ Widget PopularTipsWidget(BuildContext context, PopularTips popularTips) {
                 ),
               ],
               image: DecorationImage(
-                  image: AssetImage('${popularTips.image}'), fit: BoxFit.cover),
+                  image: CachedNetworkImageProvider('${tipsItem.image}'),
+                  fit: BoxFit.cover),
               backgroundBlendMode: BlendMode.dstATop,
               gradient: LinearGradient(
                 colors: [Colors.white, Colors.white38, Colors.white54],
@@ -41,14 +50,7 @@ Widget PopularTipsWidget(BuildContext context, PopularTips popularTips) {
                           radius: 19,
                           backgroundColor: Colors.white60,
                           child: Center(
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.black,
-                                  size: 24,
-                                  weight: 5,
-                                )),
+                            child: AddRemoveFromFavouriteWidget(featureType: FeatureType.Tips,padding: EdgeInsets.all(0),tipsItem: tipsItem,),
                           ),
                         )
                       ],
@@ -68,14 +70,14 @@ Widget PopularTipsWidget(BuildContext context, PopularTips popularTips) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${popularTips.title}',
+                          '${tipsItem.title}',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
                         Text(
-                          '${popularTips.descriptionPopTips}',
+                          '${tipsItem.description}',
                           style: TextStyle(
                               fontSize: 16, color: Colors.grey.shade600),
                           overflow: TextOverflow.visible,
@@ -90,6 +92,6 @@ Widget PopularTipsWidget(BuildContext context, PopularTips popularTips) {
           ),
         ],
       ),
-    ),
-  );
+    );
+  }
 }

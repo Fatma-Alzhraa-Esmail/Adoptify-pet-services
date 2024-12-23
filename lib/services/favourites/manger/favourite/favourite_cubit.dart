@@ -5,6 +5,7 @@ import 'package:peto_care/handlers/shared_handler.dart';
 import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/favourites/repo/favourite_repo.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
+import 'package:peto_care/services/tips/model/tips_model.dart';
 part 'favourite_state.dart';
 
 class FavouriteCubit extends Cubit<FavouriteState> {
@@ -64,6 +65,16 @@ class FavouriteCubit extends Cubit<FavouriteState> {
     });
   }
 
+ Future<void> fetchTipsDetails({required DocumentReference docRef}) async {
+    emit(FetchTipsLoadingState());
+    var fetchTipsItem =
+        await favouriteRepo.fetchTipsDetails(docRef: docRef);
+    fetchTipsItem.fold((failure) {
+       emit(FetchTipsDetailsFailureState(errMessage: failure.errMessage));
+    }, (tipItemDetails) {
+      emit(FetchTipsDetailsLoadedState(tipItem: tipItemDetails));
+    });
+  }
   Future<void> fetchFavorites() async {
     try {
       emit(FetchAllFavouritesLoadingtate());

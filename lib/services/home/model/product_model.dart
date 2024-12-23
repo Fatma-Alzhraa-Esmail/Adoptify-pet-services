@@ -5,6 +5,10 @@ class ProductModel {
   final String id;
   final String mainFeaturesId;
   final String mainFeatureCategoryId;
+  final String? coverImage;
+  final String? tag;
+  final List<dynamic>? serviceImages;
+  final ContactUsModel? contactUs;
   final DocumentReference docRef;
   final String? product_name;
   final String? service_name;
@@ -37,7 +41,11 @@ class ProductModel {
     this.service_name,
     this.discountDuration,
     this.offer_end_date,
-    this.ReviewList
+    this.ReviewList,
+    this.coverImage,
+    this.contactUs,
+    this.serviceImages,
+    this.tag,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -47,7 +55,10 @@ class ProductModel {
         mainFeatureCategoryId: json['mainFeatureCategoryId'] ?? '',
         mainFeaturesId: json['mainFeaturesId'] ?? '',
         product_name: json['product_name'] ?? '',
+        tag: json['tag'] ?? '',
         service_name: json['service_name'] ?? '',
+        coverImage: json['coverImage'] ?? '',
+        serviceImages: json['serviceImages'] ?? [],
         description: json['description'] ?? '',
         created_at: json['created_at'] != null
             ? (json['created_at'] as Timestamp).toDate()
@@ -77,6 +88,10 @@ class ProductModel {
         rating: json['rating'] != null
             ? RatingModel.fromJson(json['rating'])
             : null,
+
+         contactUs: json['contactUs'] != null
+            ? ContactUsModel.fromJson(json['contactUs'])
+            : null,    
         discountDuration: json['discountDuration'] ?? 0.0);
   }
 }
@@ -123,5 +138,25 @@ class RatingModel {
   Map<String, dynamic> toJson() => {
         "rate": rate ?? 0.0,
         "rate_count": rate_count ?? 0,
+      };
+}
+class ContactUsModel {
+  String? phone_number;
+  String? site_url;
+  ContactUsModel({
+    this.site_url,
+    this.phone_number,
+  });
+
+  factory ContactUsModel.fromJson(Map<String, dynamic> json) {
+    return ContactUsModel(
+      phone_number: json['phone_number'],
+      site_url: json['site_url'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "phone_number": phone_number ?? "",
+        "site_url": site_url ?? "",
       };
 }

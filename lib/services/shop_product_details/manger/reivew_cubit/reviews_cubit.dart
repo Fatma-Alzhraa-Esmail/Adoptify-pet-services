@@ -65,6 +65,8 @@ class ReviewsCubit extends Cubit<ReviewsState> {
         },
         (reviewItem) {
           emit(ReviewAddSuccessfullyState(reviewItem: reviewItem));
+            fetchReviews(
+                productRef: productId.docRef, productItem: productId);
         },
       );
     });

@@ -4,6 +4,7 @@ import 'package:peto_care/core/errors/failure.dart';
 import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/favourites/repo/favourite_repo.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
+import 'package:peto_care/services/tips/model/tips_model.dart';
 
 class FavouriteRepoImpl implements FavouriteRepo {
   final _firestore = FirebaseFirestore.instance;
@@ -95,6 +96,21 @@ class FavouriteRepoImpl implements FavouriteRepo {
       return right(productItem);
     } catch (e) {
       print("Error fetch product: $e");
+      if (e is FirebaseException) {
+        return Left(FirebaseFailure.fromFirebaseError(e.toString()));
+      }
+      return Left(FirebaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TipsModel>> fetchTipsDetails({required DocumentReference<Object?> docRef}) async{
+    try {
+      var docsnapShot = await docRef.get();
+      TipsModel tipsItem = TipsModel.fromJson(docsnapShot.data() as Map<String, dynamic>);
+      return right(tipsItem);
+    } catch (e) {
+      print("Error fetch tips: $e");
       if (e is FirebaseException) {
         return Left(FirebaseFailure.fromFirebaseError(e.toString()));
       }

@@ -104,10 +104,7 @@ Widget MainFeaturesWidget(
                       '${mainFeatureItem.main_feature_name}',
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    // Text(
-                    //   '${mainFeatureItem.id}',
-                    //   style: TextStyle(fontWeight: FontWeight.w500),
-                    // )
+                   
                   ],
                 ),
               ),

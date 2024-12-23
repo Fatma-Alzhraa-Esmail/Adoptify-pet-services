@@ -7,11 +7,10 @@ import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/utilities/components/rating_widget.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
-
 import '../../../utilities/theme/text_styles.dart';
 
-class ServicesListWidget extends StatelessWidget {
-  const ServicesListWidget({
+class ServicesWidget extends StatelessWidget {
+  const ServicesWidget({
     super.key,
     required this.item,
   });
@@ -25,7 +24,7 @@ class ServicesListWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () {
-        CustomNavigator.push(Routes.shopProductDetails,arguments: item);
+        CustomNavigator.push(Routes.serviceDetails, arguments: item);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -46,18 +45,20 @@ class ServicesListWidget extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                          right: 10,
-                          top: 10,
-                          child: CircleAvatar(
-                              radius: 18,
-                              backgroundColor:
-                                  Colors.grey.shade100.withOpacity(0.6),
-                              child: AddRemoveFromFavouriteWidget(
-                                productItem: item,
-                                featureType: FeatureType.Service,
-                                padding: EdgeInsets.all(0),
-                                iconSize: 26,
-                              ))),
+                        right: 10,
+                        top: 10,
+                        child: CircleAvatar(
+                          radius: 18,
+                          backgroundColor:
+                              Colors.grey.shade100.withOpacity(0.6),
+                          child: AddRemoveFromFavouriteWidget(
+                            productItem: item,
+                            featureType: FeatureType.Service,
+                            padding: EdgeInsets.all(0),
+                            iconSize: 26,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
