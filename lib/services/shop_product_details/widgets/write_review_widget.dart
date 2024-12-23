@@ -1,7 +1,6 @@
 import 'package:expandable_widgets/expandable_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:peto_care/base/manger/user/user_cubit.dart';
 import 'package:peto_care/base/repo/user_repo_impl.dart';
 import 'package:peto_care/handlers/shared_handler.dart';
@@ -17,7 +16,6 @@ import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/media.dart';
 import 'package:peto_care/utilities/theme/text_styles.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
 class WriteReviewWidget extends StatelessWidget {
   const WriteReviewWidget({super.key, required this.productDetails});
   final ProductModel productDetails;
@@ -26,14 +24,12 @@ class WriteReviewWidget extends StatelessWidget {
     return BlocConsumer<ReviewsCubit, ReviewsState>(
       listener: (context, state) {
         ReviewsCubit reviewsCubit = BlocProvider.of<ReviewsCubit>(context);
-        //       if (state is ProductRateChangeState) {
-        //   reviewsCubitCubit.rate = state.rate;
-        // } else
         if (state is SelectedImagesState) {
           reviewsCubit.images = state.images;
         } else if (state is ReviewsLoadedState) {
           reviewsCubit.ReviewsList = state.reviewsList;
         } else if (state is AskToEditReviewState) {}
+        else if (state is ReviewAddSuccessfullyState) {}
       },
       builder: (context, state) {
         ReviewsCubit reviewsCubit = BlocProvider.of<ReviewsCubit>(context);
@@ -53,7 +49,7 @@ class WriteReviewWidget extends StatelessWidget {
           );
           return Padding(
             padding: const EdgeInsets.symmetric(
-              vertical: 14,
+              vertical: 16,
             ),
             child: Expandable(
               boxShadow: [
@@ -74,8 +70,7 @@ class WriteReviewWidget extends StatelessWidget {
                           ..fetchUserData(userId: currentUserId),
                         child: BlocBuilder<UserCubit, UserState>(
                           builder: (context, state) {
-                            UserCubit userCubitInstance =
-                                context.read<UserCubit>();
+                          
                             if (state is UserLoaded) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -101,7 +96,7 @@ class WriteReviewWidget extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        state.userData?.name ?? "",
+                                        state.userData.name ?? "",
                                         style: AppTextStyles.w600,
                                       ),
                                       Text(
@@ -144,13 +139,14 @@ class WriteReviewWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
+
+                  userReview.comment!.isNotEmpty?  Padding(
                       padding: const EdgeInsets.only(left: 56),
                       child: Text(
                         userReview.comment ?? "",
                         style: AppTextStyles.w400,
                       ),
-                    ),
+                    ):Container(),
                     userReview.images?.isNotEmpty ?? false
                         ? SizedBox(
                             height: 90, // Constraint ListView's height
@@ -257,7 +253,7 @@ class WriteReviewWidget extends StatelessWidget {
                             ),
                           )
                         : Container(
-                            height: 130,
+                            height: 120,
                             width: MediaHelper.width,
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
@@ -294,44 +290,42 @@ class WriteReviewWidget extends StatelessWidget {
                       reviewsCubit.reviewController.text != ""
                   ? BlocConsumer<ShopProductDetailsCubit,
                       ShopProductDetailsStates>(
-                      listener: (context, state) {
-                        // TODO: implement listener
-                      },
-                      builder: (context, state) {
-                        ShopProductDetailsCubit shopProductDetailsCubit =
-                            context.read<ShopProductDetailsCubit>();
-                        ReviewModel? userReview =
-                            reviewsCubit.ReviewsList.firstWhere(
-                          (review) => review.user_id == currentUserId,
-                        );
-                        return CustomBtn(
-                          onTap: () async {
-                            await shopProductDetailsCubit.updateTotalRate(
+                    listener: (context, state) {
+                    },
+                    builder: (context, state) {
+                      ShopProductDetailsCubit shopProductDetailsCubit =
+                          context.read<ShopProductDetailsCubit>();
+                  
+                      return CustomBtn(
+                        onTap: () async {
+                          await shopProductDetailsCubit.updateTotalRate(
+                              productItem: productDetails,
+                              rate: reviewsCubit.rate);
+                          if (reviewsCubit.isEdit == false) {
+                            await reviewsCubit.addReview(
+                                productId: productDetails);
+                          } else {
+                            ReviewModel? userReview =
+                                reviewsCubit.ReviewsList.firstWhere(
+                              (review) => review.user_id == currentUserId,
+                            );
+                            await reviewsCubit.updateReview(
                                 productItem: productDetails,
-                                rate: reviewsCubit.rate);
-                            if (reviewsCubit.isEdit == false) {
-                              await reviewsCubit.addReview(
-                                  productId: productDetails);
-                            } else {
-                              await reviewsCubit.updateReview(
-                                  productItem: productDetails,
-                                  reviewItem: userReview);
-                            }
-                          },
-                          text: Text(
-                            reviewsCubit.isEdit ? "Save" : "Submit Review",
-                            style: AppTextStyles.w600.copyWith(
-                                color: LightTheme().background, fontSize: 20),
-                          ),
-                          buttonColor: LightTheme().mainColor,
-                          height: 50,
-                        );
-                      },
-                    )
+                                reviewItem: userReview);
+                          }
+                        },
+                        text: Text(
+                          reviewsCubit.isEdit ? "Save" : "Submit Review",
+                          style: AppTextStyles.w600.copyWith(
+                              color: LightTheme().background, fontSize: 20),
+                        ),
+                        buttonColor: LightTheme().mainColor,
+                        height: 50,
+                      );
+                    },
+                  )
                   : Container(),
-              SizedBox(
-                height: 20,
-              ),
+            
             ],
           );
         }

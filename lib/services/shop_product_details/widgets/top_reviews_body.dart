@@ -7,7 +7,6 @@ import 'package:peto_care/utilities/components/rating_widget.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 import 'package:peto_care/utilities/theme/text_styles.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
 import '../../home/model/product_model.dart';
 
 class TopReviewsBody extends StatelessWidget {
@@ -32,29 +31,30 @@ class TopReviewsBody extends StatelessWidget {
       },
       builder: (context, state) {
         ReviewsCubit reviewsCubitInstance = context.read<ReviewsCubit>();
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          child: reviewsCubitInstance.ReviewsList.length != 0
-              ? Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Top reviews",
-                          style: AppTextStyles.w600.copyWith(fontSize: 20),
-                        ),
-                        Text(
-                          "See All",
-                          style: AppTextStyles.w600.copyWith(
-                              fontSize: 16, color: LightTheme().mainColor),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ListView.separated(
+        return reviewsCubitInstance.ReviewsList.length != 0
+            ? Column(
+              mainAxisSize: MainAxisSize.min,
+
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Top reviews",
+                        style: AppTextStyles.w600.copyWith(fontSize: 20),
+                      ),
+                      Text(
+                        "See All",
+                        style: AppTextStyles.w600.copyWith(
+                            fontSize: 16, color: LightTheme().mainColor),
+                      ),
+                      
+                    ],
+                  ),
+                 
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: ListView.separated(
                       shrinkWrap: true,
                       primary: false,
                       scrollDirection: Axis.vertical,
@@ -64,6 +64,7 @@ class TopReviewsBody extends StatelessWidget {
                       separatorBuilder: (context, index) => SizedBox(
                         height: 14,
                       ),
+                      padding: EdgeInsets.all(0),
                       itemBuilder: (context, index) {
                         var reviewItemIndex =
                             reviewsCubitInstance.ReviewsList[index];
@@ -81,12 +82,10 @@ class TopReviewsBody extends StatelessWidget {
                                       create: (context) =>
                                           UserCubit(UserRepoImpl())
                                             ..fetchUserData(
-                                                userId:
-                                                    reviewItemIndex.user_id),
+                                                userId: reviewItemIndex.user_id),
                                       child: BlocBuilder<UserCubit, UserState>(
                                         builder: (context, state) {
-                                          UserCubit userCubitInstance =
-                                              context.read<UserCubit>();
+                                         
                                           if (state is UserLoaded) {
                                             return Row(
                                               children: [
@@ -113,8 +112,7 @@ class TopReviewsBody extends StatelessWidget {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      state.userData?.name ??
-                                                          "",
+                                                      state.userData.name ?? "",
                                                       style: AppTextStyles.w600,
                                                     ),
                                                     Text(
@@ -153,7 +151,10 @@ class TopReviewsBody extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height:
+                                      reviewItemIndex.images?.isNotEmpty ?? false
+                                          ? 10
+                                          : 0,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 56),
@@ -178,30 +179,31 @@ class TopReviewsBody extends StatelessWidget {
                                             child: Image.network(
                                               height: 60,
                                               width: 70,
-                                              reviewItemIndex
-                                                  .images![imageIndex],
+                                              reviewItemIndex.images![imageIndex],
                                               fit: BoxFit.cover,
                                             ),
                                           ),
                                           separatorBuilder: (context, index) =>
                                               SizedBox(width: 8),
                                           itemCount:
-                                              reviewItemIndex.images?.length ??
-                                                  0,
+                                              reviewItemIndex.images?.length ?? 0,
                                         ),
                                       )
                                     : Container(),
                               ],
                             ),
                             SizedBox(
-                              height: 20,
+                              height:
+                                  reviewsCubitInstance.ReviewsList.length > 3 &&
+                                          index != 2
+                                      ? 20
+                                      : 0,
                             ),
                             reviewsCubitInstance.ReviewsList.length > 3 &&
                                     index != 2
                                 ? Divider(
-                                    color: LightTheme()
-                                        .borderColor
-                                        .withOpacity(0.4),
+                                    color:
+                                        LightTheme().borderColor.withOpacity(0.4),
                                     height: 0.5,
                                     thickness: 1,
                                   )
@@ -210,13 +212,13 @@ class TopReviewsBody extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                )
-              : Container(),
-        );
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                ],
+              )
+            : Container();
       },
     );
   }

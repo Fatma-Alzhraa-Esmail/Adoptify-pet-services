@@ -108,8 +108,11 @@ class ShopProductDetails extends StatelessWidget {
                             productDetails: productItemDetails,
                           ),
                         ),
-                        TopReviewsBody(
-                          productItem: productItemDetails,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 20),
+                          child: TopReviewsBody(
+                            productItem: productItemDetails,
+                          ),
                         ),
                       ],
                     ),

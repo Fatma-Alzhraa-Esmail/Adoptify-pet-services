@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/routers/routers.dart';
 import 'package:peto_care/services/auth/Login/pages/login.dart';
 import 'package:peto_care/services/cart/pages/cart.dart';
@@ -16,9 +15,8 @@ import 'package:peto_care/services/myaccount/pages/add_new_card.dart';
 import 'package:peto_care/services/myaccount/pages/address.dart';
 import 'package:peto_care/services/myaccount/pages/history.dart';
 import 'package:peto_care/services/myaccount/pages/settings.dart';
-import 'package:peto_care/services/servicesFeatures/pages/services_list_page.dart';
-import 'package:peto_care/services/shop_product_details/manger/shop_product_details_cubit.dart';
-import 'package:peto_care/services/shop_product_details/pages/shop_product_details.dart';
+import 'package:peto_care/services/servicesFeatures/pages/service_details.dart';
+import 'package:peto_care/services/shop_product_details/pages/shop_product_details_page.dart';
 import 'package:peto_care/services/verification_code/pages/phonenumberverfication.dart';
 import 'package:peto_care/services/auth/register/pages/register.dart';
 import 'package:peto_care/services/verification_code/pages/verviy.dart';
@@ -84,9 +82,9 @@ class CustomNavigator {
         return _pageRoute(Address());
       case Routes.history:
         return _pageRoute(History());
-      case Routes.servicesFeature:
-        //  return _pageRoute( ServicesFeature());
-        return _pageRoute(ServicesPage());
+      // case Routes.servicesFeature:
+      //   //  return _pageRoute( ServicesFeature());
+      //   return _pageRoute(ServicesPage());
       case Routes.shopFeature:
         final args = settings.arguments as Map<String, dynamic>;
         final id = args['id'] as String; // Extract 'id'
@@ -113,6 +111,14 @@ class CustomNavigator {
         final ProductModel productItemDetails =
             args; // Extract 'selectedCategoryId'
         return _pageRoute(ShopProductDetails(
+          productItemDetails: productItemDetails,
+        ));
+      case Routes.serviceDetails:
+        final args = settings.arguments as ProductModel;
+
+        final ProductModel productItemDetails =
+            args; // Extract 'selectedCategoryId'
+        return _pageRoute(ServiceDetailsPage(
           productItemDetails: productItemDetails,
         ));
       case Routes.FavouriteScreen:

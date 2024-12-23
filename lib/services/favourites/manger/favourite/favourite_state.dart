@@ -62,3 +62,16 @@ final class FetchProductDetailsFailureState extends FavouriteState {
 
   FetchProductDetailsFailureState({required this.errMessage});
 }
+final class FetchTipsLoadingState extends FavouriteState {}
+
+final class FetchTipsDetailsLoadedState extends FavouriteState {
+  final TipsModel tipItem;
+
+  FetchTipsDetailsLoadedState({required this.tipItem});
+}
+
+final class FetchTipsDetailsFailureState extends FavouriteState {
+  final String errMessage;
+
+  FetchTipsDetailsFailureState({required this.errMessage});
+}
