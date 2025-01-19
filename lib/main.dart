@@ -241,3 +241,49 @@ class MyApp extends StatelessWidget {
 
 }
 
+// import 'package:flutter/material.dart';
+// import 'package:peto_care/dynamic_linking/bloc.dart';
+// import 'package:peto_care/dynamic_linking/poc.dart';
+// import 'package:peto_care/firebase_options.dart';
+// import 'package:peto_care/handlers/shared_handler.dart';
+// import 'package:peto_care/network/network_handler.dart';
+// import 'package:provider/provider.dart';
+
+
+// void main() async {
+
+//   WidgetsFlutterBinding.ensureInitialized();
+
+//   await SharedHandler.init();
+
+//   NetworkHandler.init();
+//     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+
+//   runApp(PocApp());
+
+// }
+
+// class PocApp extends StatelessWidget {
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     DeepLinkBloc _bloc = DeepLinkBloc();
+//     return MaterialApp(
+//         title: 'Flutter and Deep Links PoC',
+//         theme: ThemeData(
+//             primarySwatch: Colors.blue,
+//             textTheme: TextTheme(
+//               bodyMedium: TextStyle(
+//                 fontWeight: FontWeight.w300,
+//                 color: Colors.blue,
+//                 fontSize: 25.0,
+//               ),
+//             )),
+//         home: Scaffold(
+//             body: Provider<DeepLinkBloc>(
+//                 create: (context) => _bloc,
+//                 dispose: (context, bloc) => bloc.dispose(),
+//                 child: PocWidget())));
+//   }
+// }

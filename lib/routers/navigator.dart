@@ -17,6 +17,9 @@ import 'package:peto_care/services/myaccount/pages/history.dart';
 import 'package:peto_care/services/myaccount/pages/settings.dart';
 import 'package:peto_care/services/servicesFeatures/pages/service_details.dart';
 import 'package:peto_care/services/shop_product_details/pages/shop_product_details_page.dart';
+import 'package:peto_care/services/tips/model/tips_model.dart';
+import 'package:peto_care/services/tips/pages/comments_page.dart';
+import 'package:peto_care/services/tips/pages/tips_details_page.dart';
 import 'package:peto_care/services/verification_code/pages/phonenumberverfication.dart';
 import 'package:peto_care/services/auth/register/pages/register.dart';
 import 'package:peto_care/services/verification_code/pages/verviy.dart';
@@ -123,6 +126,18 @@ class CustomNavigator {
         ));
       case Routes.FavouriteScreen:
         return _pageRoute(FavouritePage());
+      case Routes.TipsDetails:
+       final args = settings.arguments as TipsModel;
+         final TipsModel tipsItemDetails =
+            args;
+        return _pageRoute(TipsDetailsPage(
+          tipsItemDetails:tipsItemDetails,
+        ));
+         case Routes.TipsComments:
+            final args = settings.arguments as TipsModel;
+         final TipsModel tipsItemDetails =
+            args;
+        return _pageRoute(CommentsPage(tipsItem: tipsItemDetails,));
     }
     return MaterialPageRoute(builder: (_) => Container());
   }

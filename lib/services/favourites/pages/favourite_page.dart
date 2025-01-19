@@ -215,7 +215,8 @@ class FavouritePage extends StatelessWidget {
                                           if (state
                                               is FetchTipsDetailsLoadedState) {
                                              return PopularTipsWidget(
-                                            tipsItem: state.tipItem);
+                                            tipsItem: state.tipItem, tipsCubit:null ,)
+                                            ;
                                           }
                                           return Container();
                                         },

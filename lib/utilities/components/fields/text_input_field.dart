@@ -17,13 +17,14 @@ class TextInputField extends StatefulWidget {
     this.hasError = false,
     this.keyboardType,
     this.suffixIcon,
-    this.maxLines = 0,
+    this.maxLines,
     this.maxLength,
     // this.topIcon,
     this.top_label_text,
     this.label,
     this.onTap,
     this.borderType = BorderType.UnderLine,
+    this.minLines
   });
   final String? hintText;
   final String? errorText;
@@ -34,7 +35,8 @@ class TextInputField extends StatefulWidget {
   final bool withBottomPadding;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
-  final int maxLines;
+  final int? maxLines;
+  final int? minLines;
   final int? maxLength;
   final List<TextInputFormatter> inputFormatters;
   // final Widget? topIcon;
@@ -88,6 +90,8 @@ class _TextInputFieldState extends State<TextInputField> {
     return Column(
       children: [
         TextFormField(
+          minLines: widget.minLines ??1,
+          maxLines: widget.maxLines??1,
           style: TextStyle(
             color: Colors.black,
             fontSize: 16,

@@ -18,7 +18,7 @@ class NetworkHandler {
   }
 
   _errorHandler(DioError error) {
-    log_error(type: error.type.name, message: error.message);
+    log_error(type: error.type.name, message: error.message??"");
     throw error;
   }
 
