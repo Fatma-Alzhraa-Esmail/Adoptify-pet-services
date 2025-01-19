@@ -20,25 +20,26 @@ class TipsCubit extends Cubit<TipsState> {
     var statusTips = await tipsRepo.getStatusTips();
     statusTips.fold((failure) {
       emit(TipsFetchStatusErrorState(errMessage: failure.errMessage));
-       tipsWithStatusIsLoading = false;
+      tipsWithStatusIsLoading = false;
     }, (statusTipsList) {
       tipsWithStatus = statusTipsList;
       emit(TipsFetchStatusLoadedState(tipsList: statusTipsList));
-       tipsWithStatusIsLoading = false;
+      tipsWithStatusIsLoading = false;
     });
     return [];
   }
+
   Future<List<TipsModel>?> fetchHighlightTips() async {
     tipsWithHighlightIsLoading = true;
     emit(TipsFetchHighlightLoadingState());
     var highlightTips = await tipsRepo.getHighlightedTips();
     highlightTips.fold((failure) {
       emit(TipsFetchHighlightErrorState(errMessage: failure.errMessage));
-       tipsWithHighlightIsLoading = false;
+      tipsWithHighlightIsLoading = false;
     }, (HighlightTipsList) {
       tipsWithHighlighit = HighlightTipsList;
       emit(TipsFetchHighlightLoadedState(tipsList: HighlightTipsList));
-       tipsWithHighlightIsLoading = false;
+      tipsWithHighlightIsLoading = false;
     });
     return [];
   }
@@ -49,12 +50,19 @@ class TipsCubit extends Cubit<TipsState> {
     var listTips = await tipsRepo.getTips();
     listTips.fold((failure) {
       emit(TipsFetchErrorState(errMessage: failure.errMessage));
-       tipsIsLoading = false;
+      tipsIsLoading = false;
     }, (tipsList) {
       tips = tipsList;
       emit(TipsFetchLoadedState(tipsList: tipsList));
-       tipsIsLoading = false;
+      tipsIsLoading = false;
     });
     return [];
+  }
+
+  allOperation() async{
+    await  fetchTips();
+   await fetchStatusTips();
+  await  fetchHighlightTips();
+  
   }
 }

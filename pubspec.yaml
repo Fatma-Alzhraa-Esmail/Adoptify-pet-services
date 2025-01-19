@@ -52,7 +52,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_slidable: ^3.0.0
   flutter_staggered_animations: ^1.1.1
-  flutter_svg: 2.0.10+1
+  flutter_svg: ^2.0.16
   get: null
   google_sign_in: ^6.2.2
   hexcolor: null
@@ -60,7 +60,7 @@ dependencies:
   image_picker: ^1.1.2
   intl: ^0.19.0
   intl_phone_field: ^3.2.0
-  intl_phone_number_input: ^0.7.4
+  intl_phone_number_input: ^0.7.3
   modal_progress_hud_nsn: ^0.5.1
   table_calendar: ^3.0.9
   timeago: ^3.7.0
@@ -70,11 +70,11 @@ dev_dependencies:
   conditional_builder_null_safety: null
 
   # Network packages
-  dio: ^4.0.6
+  dio: ^5.7.0
   dotted_border: null
 
   # Device resources
-  file_picker: ^5.2.5
+  file_picker: ^8.1.7
   flutter_blue_plus: ^1.4.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -90,11 +90,11 @@ dev_dependencies:
   # UI packages
   flutter_test:
     sdk: flutter
-  permission_handler: ^10.2.0
+  permission_handler: ^11.3.1
   pinput: null
 
   # State Managment
-  rxdart: ^0.27.7
+  rxdart: ^0.28.0
 
   # Local Database
   shared_preferences: ^2.0.16
@@ -106,7 +106,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

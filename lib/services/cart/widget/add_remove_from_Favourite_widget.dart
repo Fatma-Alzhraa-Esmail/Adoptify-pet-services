@@ -8,10 +8,10 @@ import 'package:peto_care/services/tips/model/tips_model.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
 
 class AddRemoveFromFavouriteWidget extends StatelessWidget {
- const  AddRemoveFromFavouriteWidget({
+  const AddRemoveFromFavouriteWidget({
     super.key,
-     this.productItem,
-     this.tipsItem,
+    this.productItem,
+    this.tipsItem,
     required this.featureType,
     this.padding,
     this.iconSize,
@@ -47,7 +47,8 @@ class AddRemoveFromFavouriteWidget extends StatelessWidget {
           FavouriteCubit favouriteCubit = context.read<FavouriteCubit>();
 
           bool isFavourite = favouriteCubit.allFavouritesList.any(
-            (isFavourite) => isFavourite.docRef == (productItem?.docRef ?? tipsItem!.docRef),
+            (isFavourite) =>
+                isFavourite.docRef == (productItem?.docRef ?? tipsItem!.docRef),
           );
 
           return Padding(
@@ -61,12 +62,18 @@ class AddRemoveFromFavouriteWidget extends StatelessWidget {
                   favouriteCubit.addToFavourite(
                       favouriteItem: FavouriteModel(
                     featureType: featureType,
-                    docRef: productItem?.docRef ?? tipsItem!.docRef,
+                    docRef: productItem != null
+                        ? productItem!.docRef
+                        : tipsItem!.docRef,
                   ));
                 } else {
                   FavouriteModel favouriteItemDetails =
                       favouriteCubit.allFavouritesList.firstWhere(
-                    (isFavourite) => isFavourite.docRef == (productItem!.docRef ?? tipsItem?.docRef) ,
+                    (isFavourite) =>
+                        isFavourite.docRef ==
+                        (productItem != null
+                            ? productItem!.docRef
+                            : tipsItem!.docRef),
                   );
 
                   favouriteCubit.removeFromFavourite(
@@ -82,7 +89,7 @@ class AddRemoveFromFavouriteWidget extends StatelessWidget {
                   : Icon(
                       Icons.favorite_border,
                       size: iconSize ?? 24,
-                      color: unCheckedColor??LightTheme().secondery,
+                      color: unCheckedColor ?? LightTheme().secondery,
                     ),
             ),
           );

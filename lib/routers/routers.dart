@@ -31,4 +31,6 @@ abstract class Routes {
   static const String shopProductDetails = "shopProductDetails";
   static const String serviceDetails = "serviceDetails";
   static const String FavouriteScreen = "FavouriteScreen";
+  static const String TipsDetails = "TipsDetails";
+  static const String TipsComments = "TipsComments";
 }
