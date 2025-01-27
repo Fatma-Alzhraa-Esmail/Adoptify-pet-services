@@ -23,13 +23,11 @@ class ProductModel {
   final DateTime? offer_end_date;
   final List<ReviewModel>? ReviewList;
 
-
   ProductModel({
     required this.id,
     required this.mainFeatureCategoryId,
     required this.mainFeaturesId,
     required this.docRef,
-    
     this.product_name,
     this.created_at,
     this.description,
@@ -77,7 +75,7 @@ class ProductModel {
                     .map((colorJson) => ColorsModel.fromJson(colorJson)),
               )
             : [],
-             ReviewList: json['ReviewList'] != null
+        ReviewList: json['ReviewList'] != null
             ? List<ReviewModel>.from(
                 json['ReviewList']
                     .map((reviewJson) => ReviewModel.fromJson(reviewJson)),
@@ -88,10 +86,9 @@ class ProductModel {
         rating: json['rating'] != null
             ? RatingModel.fromJson(json['rating'])
             : null,
-
-         contactUs: json['contactUs'] != null
+        contactUs: json['contactUs'] != null
             ? ContactUsModel.fromJson(json['contactUs'])
-            : null,    
+            : null,
         discountDuration: json['discountDuration'] ?? 0.0);
   }
 }
@@ -99,11 +96,9 @@ class ProductModel {
 class ColorsModel {
   String? color;
   List<String>? images;
+  int? amount;
 
-  ColorsModel({
-    this.color,
-    this.images,
-  });
+  ColorsModel({this.color, this.images, this.amount});
 
   factory ColorsModel.fromJson(Map<String, dynamic> json) {
     return ColorsModel(
@@ -111,12 +106,14 @@ class ColorsModel {
       images: json['images'] != null
           ? List<String>.from(json['images']) // Ensure this is a List<String>
           : [],
+      amount: json['amount'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         "color": color ?? '000000',
         "images": images ?? [],
+        "amount":amount??0
       };
 }
 
@@ -140,6 +137,7 @@ class RatingModel {
         "rate_count": rate_count ?? 0,
       };
 }
+
 class ContactUsModel {
   String? phone_number;
   String? site_url;

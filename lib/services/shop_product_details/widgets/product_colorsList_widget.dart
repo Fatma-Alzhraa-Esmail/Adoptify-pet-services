@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/shop_product_details/manger/shop_product_details_cubit.dart';
 import 'package:peto_care/services/shop_product_details/manger/shop_product_details_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peto_care/services/home/model/product_model.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ProductColorsListWidget extends StatelessWidget {
   const ProductColorsListWidget({

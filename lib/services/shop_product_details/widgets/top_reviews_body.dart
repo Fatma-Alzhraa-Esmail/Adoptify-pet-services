@@ -31,7 +31,7 @@ class TopReviewsBody extends StatelessWidget {
       },
       builder: (context, state) {
         ReviewsCubit reviewsCubitInstance = context.read<ReviewsCubit>();
-        return reviewsCubitInstance.ReviewsList.length != 0
+        return reviewsCubitInstance.ReviewsList.isNotEmpty
             ? Column(
               mainAxisSize: MainAxisSize.min,
 

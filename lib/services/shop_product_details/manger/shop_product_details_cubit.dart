@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/shop_product_details/manger/shop_product_details_state.dart';
@@ -13,13 +13,11 @@ class ShopProductDetailsCubit extends Cubit<ShopProductDetailsStates> {
   int currentIndex = 0;
   int currentImageListIndex = 0;
   String selectedColor = "";
-  
+  ProductModel? productItem;
   void changeColor(int index) {
     currentIndex = index;
     emit(ShopChangeImageIndexState(index: index));
   }
-
-
 
   void selectColor(String color, int colorImageListIndex) {
     selectedColor = color;
@@ -28,8 +26,8 @@ class ShopProductDetailsCubit extends Cubit<ShopProductDetailsStates> {
         color: color, colorImageListIndex: colorImageListIndex));
   }
 
-
-  Future<void> updateTotalRate({required ProductModel productItem,required num rate}) async {
+  Future<void> updateTotalRate(
+      {required ProductModel productItem, required num rate}) async {
     var updateTotalProductRate = await productDetailsRepo.updateTotalRate(
         rate: rate, productItem: productItem);
     updateTotalProductRate.fold((failure) {
@@ -40,5 +38,15 @@ class ShopProductDetailsCubit extends Cubit<ShopProductDetailsStates> {
     });
   }
 
-
+  Future<ProductModel?> fetchProductDetails({
+    required DocumentReference productRef,
+  }) async {
+    var productDetails =
+        await productDetailsRepo.fetchProductDetails(productRef: productRef);
+    productDetails.fold((failure) {
+      emit(ProductDetailsError(errorMessage: failure.errMessage));
+    }, (productDetails) {
+      emit(ProductDetailsLoaded(productItem: productDetails));
+    });
+  }
 }

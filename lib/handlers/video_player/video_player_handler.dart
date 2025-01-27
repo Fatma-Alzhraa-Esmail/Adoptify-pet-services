@@ -40,6 +40,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
           // show error
         }
         break;
+        
       default:
     }
     _controller.addListener(() => setState(() {}));

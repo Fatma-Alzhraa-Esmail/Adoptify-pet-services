@@ -147,13 +147,14 @@ class ShopProductDetails extends StatelessWidget {
                                 bool isCart = cartCubit.allCartList.any(
                                   (isCart) =>
                                       isCart.productRef ==
-                                      productItemDetails.docRef,
+                                      productItemDetails.docRef && isCart.color==shopProductDetailsCubitInstance.selectedColor,
                                 );
                                 return CustomBtn(
                                   onTap: () {
                                     if (!isCart) {
                                       cartCubit.addToCart(
                                           cartItem: CartModel(
+                                            count: 0,
                                               productRef:
                                                   productItemDetails.docRef,
                                               color:

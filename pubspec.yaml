@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   
+  aligned_dialog: ^0.0.7
   app_links: ^6.3.3
   bloc: ^8.1.4
   cached_network_image: ^3.4.1

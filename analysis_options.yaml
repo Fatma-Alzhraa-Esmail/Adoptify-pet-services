@@ -12,6 +12,7 @@ analyzer:
      file_names: ignore ignore
      deprecated_member_use: ignore
      prefer_typing_uninitialized_variables: ignore
+     void_checks: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

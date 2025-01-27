@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:peto_care/services/home/model/product_model.dart';
-import 'package:peto_care/services/shop_product_details/model/review_model.dart';
 
 abstract class ShopProductDetailsStates {}
 
@@ -27,7 +24,7 @@ class ShopChangeColor extends ShopProductDetailsStates {
   final String color;
   final int colorImageListIndex;
 
-  ShopChangeColor({required this.color,required this.colorImageListIndex});
+  ShopChangeColor({required this.color, required this.colorImageListIndex});
 }
 // reviw
 
@@ -36,8 +33,24 @@ class ProductRateChangeErrorState extends ShopProductDetailsStates {
 
   ProductRateChangeErrorState({required this.errMessage});
 }
+
 class ProductRateChangeSuccessState extends ShopProductDetailsStates {
   final ProductModel updatedProductItem;
 
   ProductRateChangeSuccessState({required this.updatedProductItem});
+}
+
+class ProductDetailsLoading extends ShopProductDetailsStates {}
+
+class ProductDetailsLoaded extends ShopProductDetailsStates {
+final  ProductModel productItem;
+
+  ProductDetailsLoaded({required this.productItem});
+
+}
+
+class ProductDetailsError extends ShopProductDetailsStates {
+  final String errorMessage;
+
+  ProductDetailsError({required this.errorMessage});
 }
