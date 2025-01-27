@@ -23,7 +23,6 @@ class _DeliverToWidgetState extends State<DeliverToWidget> {
     return Column(
       children: [
         Expanded(
-          // flex: 2,
           child: BlocProvider(
               create: (BuildContext context) => CompleteProfileCubit(),
               child: BlocConsumer<CompleteProfileCubit,
@@ -158,15 +157,7 @@ class _DeliverToWidgetState extends State<DeliverToWidget> {
             ),
           ),
         ),
-        //  Padding(
-        //         padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 20),
-        //         child: CustomBtn(
-        //           text: "CONTINUE",
-        //           buttonColor: Colors.amber,
-        //           height: 56,
-              
-        //         ),
-        //       ),
+       
       ],
     );
   }

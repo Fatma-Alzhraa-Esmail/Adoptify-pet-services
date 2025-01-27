@@ -6,7 +6,6 @@ import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/shop_product_details/repo/product_details_repo.dart';
 
 class ProductDetailsRepoImpl implements ProductDetailsRepo {
-
   @override
   Future<Either<Failure, ProductModel>> updateTotalRate(
       {required num rate, required ProductModel productItem}) async {
@@ -32,5 +31,21 @@ class ProductDetailsRepoImpl implements ProductDetailsRepo {
     }
   }
 
+  @override
+  Future<Either<Failure, ProductModel>> fetchProductDetails(
+      {required DocumentReference<Object?> productRef}) async {
+    try {
+      var docSnapShot = await productRef.get();
+      ProductModel productItem = ProductModel.fromJson(docSnapShot.data() as Map<String,dynamic>);
 
+      return right(productItem);
+    } catch (e) {
+      print("Error fetching discounted products: $e");
+      print("Error fetching products44: $e");
+      if (e is FirebaseException) {
+        return Left(FirebaseFailure.fromFirebaseError(e.toString()));
+      }
+      return Left(FirebaseFailure(e.toString()));
+    }
+  }
 }

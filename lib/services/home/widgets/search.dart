@@ -1,10 +1,11 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:peto_care/routers/navigator.dart';
+import 'package:peto_care/routers/routers.dart';
 import 'package:peto_care/utilities/components/search.dart';
 
 class TopSearchBarWidget extends StatelessWidget {
- const  TopSearchBarWidget({
+  const TopSearchBarWidget({
     super.key,
   });
 
@@ -25,13 +26,17 @@ class TopSearchBarWidget extends StatelessWidget {
         SizedBox(
           width: 5,
         ),
-        Icon(
-          CupertinoIcons.cart,
-          color: Colors.white,
-          size: 27,
+        GestureDetector(
+          onTap: () {
+            CustomNavigator.push(Routes.cart);
+          },
+          child: Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
+            size: 27,
+          ),
         ),
       ],
     );
   }
 }
-

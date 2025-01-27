@@ -16,7 +16,8 @@ class LightTheme implements ColorsTheme {
 
   @override
   Color greyTitle = Color(0xff737373);
-
+ @override
+  Color greyTitle1 = Colors.grey.shade700;
   @override
   Color background = Colors.white;
 

@@ -3,11 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/services/favourites/model/favourite_model.dart';
 import 'package:peto_care/services/home/manager/main_faeture_categories/main_feature_categories_cubit.dart';
 import 'package:peto_care/services/home/model/main_features_model.dart';
-import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/home/widgets/categories_header_widget.dart';
 import 'package:peto_care/services/shop_product_details/widgets/product_list_widget.dart';
 import 'package:peto_care/services/servicesFeatures/widget/service_list_widget.dart';
-import 'package:peto_care/services/servicesFeatures/widget/service_widget.dart';
 import 'package:peto_care/utilities/theme/media.dart';
 
 class MainFeatureCategories extends StatelessWidget {

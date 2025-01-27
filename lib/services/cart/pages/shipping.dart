@@ -44,6 +44,7 @@ class _ShippingScreenState extends State<ShippingScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 30,
+                vertical: 16,
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,7 +96,6 @@ class _ShippingScreenState extends State<ShippingScreen> {
                         currentScreen = 2;
                       });
                     },
-                    // child: Icon(Icons.check_circle_outline,color: currentScreen==2?Colors.amber:Colors.grey.shade600,)
                     child: drawSvgIcon(
                       "confirm",
                       width: 30,

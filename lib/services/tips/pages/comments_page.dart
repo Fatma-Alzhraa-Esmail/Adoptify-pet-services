@@ -17,12 +17,11 @@ import 'package:timeago/timeago.dart' as timeago;
 class CommentsPage extends StatelessWidget {
   const CommentsPage({super.key, required this.tipsItem});
   final TipsModel tipsItem;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: true, // Ensure keyboard doesn't overlap content
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () => CustomNavigator.pop(),
@@ -122,7 +121,7 @@ class CommentsPage extends StatelessWidget {
                                     comment_content: commentCubit.is_reply
                                         ? commentCubit.commentController.text
                                             .replaceAll(
-                                                "${commentCubit.mentioned}", "")
+                                                commentCubit.mentioned, "")
                                             .trim()
                                         : commentCubit.commentController.text,
                                     likes_count: 0,
@@ -175,7 +174,7 @@ class CommentsPage extends StatelessWidget {
         ),
         child: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
-            UserCubit usercubit = context.read<UserCubit>();
+           
             int visibleReplies =
                 commentCubit.visibleRepliesCount[mainComment.comment_id!.id] ??
                     1;
@@ -194,7 +193,7 @@ class CommentsPage extends StatelessWidget {
                       radius: 24,
                       backgroundImage: state is UserLoaded
                           ? state.userData.image!.isEmpty ||
-                                  state.userData.image!.isEmpty == ''
+                                  state.userData.image!.isEmpty
                               ? AssetImage(Assets.assetsImagesPerson)
                               : NetworkImage(state.userData.image!)
                           : AssetImage(Assets.assetsImagesPerson),

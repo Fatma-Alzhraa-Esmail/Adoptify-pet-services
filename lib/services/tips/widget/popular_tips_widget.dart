@@ -9,7 +9,7 @@ import 'package:peto_care/utilities/components/shimmer/shimmer.dart';
 import 'package:peto_care/utilities/theme/media.dart';
 
 class PopularTipsWidget extends StatelessWidget {
-   PopularTipsWidget({
+   const PopularTipsWidget({
     super.key,
     required this.tipsItem,
    required this.tipsCubit,
