@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/routers/navigator.dart';
-import 'package:peto_care/services/myaccount/bloc/cubit.dart';
-import 'package:peto_care/services/myaccount/bloc/state.dart';
 import 'package:peto_care/services/myaccount/widget/accepted_payment_card.dart';
 import 'package:peto_care/utilities/components/custom_btn.dart';
 import 'package:peto_care/utilities/components/fields/text_input_field.dart';
@@ -70,29 +68,29 @@ class _AddNewCardState extends State<AddNewCard> {
                     style: TextStyle(fontWeight: FontWeight.w700, fontSize: 21),
                   ),
                 ),
-                BlocProvider(
-                    create: (BuildContext context) => CompleteProfileCubit(),
-                    child: BlocConsumer<CompleteProfileCubit,
-                            CompleteProfileStates>(
-                        listener: (BuildContext context,
-                            CompleteProfileStates state) {},
-                        builder: (BuildContext context,
-                            CompleteProfileStates state) {
-                          CompleteProfileCubit cubit =
-                              CompleteProfileCubit.get(context);
-                          return Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 86,
-                            child: ListView.builder(
-                                // itemExtent: 130,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: cubit.acceptedPaymentCard.length,
-                                itemBuilder: (context, index) =>
-                                    AcceptedPaymentCardWidget(context,
-                                        cubit.acceptedPaymentCard[index])),
-                          );
-                        })),
-                Padding(
+                // BlocProvider(
+                //     create: (BuildContext context) => CompleteProfileCubit(),
+                //     child: BlocConsumer<CompleteProfileCubit,
+                //             CompleteProfileStates>(
+                //         listener: (BuildContext context,
+                //             CompleteProfileStates state) {},
+                //         builder: (BuildContext context,
+                //             CompleteProfileStates state) {
+                //           CompleteProfileCubit cubit =
+                //               CompleteProfileCubit.get(context);
+                //           return Container(
+                //             width: MediaQuery.of(context).size.width,
+                //             height: 86,
+                //             child: ListView.builder(
+                //                 // itemExtent: 130,
+                //                 scrollDirection: Axis.horizontal,
+                //                 itemCount: cubit.acceptedPaymentCard.length,
+                //                 itemBuilder: (context, index) =>
+                //                     AcceptedPaymentCardWidget(context,
+                //                         cubit.acceptedPaymentCard[index])),
+                //           );
+                //         })),
+              Padding(
                   padding: const EdgeInsets.only(
                       left: 18, right: 18, top: 10, bottom: 4),
                   child: Text(

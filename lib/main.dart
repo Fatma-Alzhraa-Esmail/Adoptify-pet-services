@@ -1,3 +1,4 @@
+import 'package:peto_care/core/utils/api_key.dart';
 import 'package:peto_care/firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ import 'package:peto_care/utilities/theme/text_styles.dart';
 
 import 'handlers/localization_handler.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 
 void main() async {
@@ -35,6 +37,7 @@ void main() async {
   NetworkHandler.init();
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+   Stripe.publishableKey = ApiKeys.puplishableKey;
 
   runApp(MyApp());
 

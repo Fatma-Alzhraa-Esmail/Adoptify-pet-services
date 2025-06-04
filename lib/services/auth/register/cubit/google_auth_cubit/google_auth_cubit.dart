@@ -82,7 +82,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
       SharedKeys().isRegister,
       SharedKeys().user
     ]);
-    CustomNavigator.push(Routes.home, clean: true);
+    CustomNavigator.push(Routes.login, clean: true,);
   }
 
   Future<void> _saveUserData(User user) async {
