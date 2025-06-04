@@ -1,6 +1,0 @@
-abstract class ApiKeys {
- static String secretKey = "sk_test_51OV4TTI7vIOyb6bVen4k2ErMN5Gg4Zb3TNLlMBS3R762C38dHqwF7RhoiVwYMlWsqLYIZH2j7JX1P8ZEI4zudmOw00zxiiyV6d";
- static String puplishableKey = "pk_test_51OV4TTI7vIOyb6bVQVg8iTmQdWbiePqGiQ2XRNcmPZJNmKGJDHKBug1cbJXmMeJ9HKIjcqkhlSoyNHdd6ygy8mru00MGRNw8av";
- static String clientID = "ARvJsL7UoO3_v2aJYWKjmKzhTL_ZHI361MjLb3nyXuh9VYv3SyYQAByjzWjqq2tMg2zTHIdgFWU7EXZF";
- static String paypalSecretKey = "EBQ3ckjI44XF3XzedT1XS0aawEtY1iI9m4GBFjQpQn42z8RrLWWLvs76IsswMT0hPNDyJWtY68HvL5oT";
-}
