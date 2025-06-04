@@ -10,7 +10,7 @@ import 'package:peto_care/handlers/location_select/model/address_details_model.d
 
 abstract class LocationSelect {
  static Future<AddressDetailsModel?> customAddressPicker(BuildContext context) async {
-    String googleMapsApiKey = "AIzaSyC55YwtHlB1EnKE_O-kPCZ399GlagquYoY";
+    String googleMapsApiKey = "";
     final p = await PlacesAutocomplete.show(
       context: context,
       apiKey: googleMapsApiKey,
