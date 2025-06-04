@@ -7,6 +7,8 @@ import 'package:peto_care/services/favourites/repo/favourite_repo_impl.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/home/widgets/hot_shop.dart';
 import 'package:peto_care/services/servicesFeatures/widget/service_widget.dart';
+import 'package:peto_care/services/tips/manger/tips_cubit/tips_cubit.dart';
+import 'package:peto_care/services/tips/repo/tips_repo_imp.dart';
 import 'package:peto_care/services/tips/widget/popular_tips_widget.dart';
 import 'package:peto_care/utilities/components/custom_btn.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
@@ -183,46 +185,59 @@ class FavouritePage extends StatelessWidget {
                             )
                           : favouriteCubit.selectedFeatureType ==
                                   FeatureType.Tips.name
-                              ? GridView.builder(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 13, horizontal: 14),
-                                  itemCount: favouriteCubit
-                                          .groupedFavorites[favouriteCubit
-                                              .selectedFeatureType]
-                                          ?.length ??
-                                      0,
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 2 / 1.9,
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 15.0,
-                                          mainAxisSpacing: 15.0),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    var item = favouriteCubit.groupedFavorites[
-                                        favouriteCubit
-                                            .selectedFeatureType]![index];
-                                    return BlocProvider(
-                                      create: (context) =>
-                                          FavouriteCubit(FavouriteRepoImpl())
-                                            ..fetchTipsDetails(
-                                                docRef: item.docRef),
-                                      child: BlocBuilder<FavouriteCubit,
-                                          FavouriteState>(
-                                        builder: (context, state) {
-                                          if (state
-                                              is FetchTipsDetailsLoadedState) {
-                                             return PopularTipsWidget(
-                                            tipsItem: state.tipItem, tipsCubit:null ,)
-                                            ;
-                                          }
-                                          return Container();
+                              ? BlocProvider(
+                                  create: (context) => TipsCubit(TipsRepoImp()),
+                                  child: BlocConsumer<TipsCubit, TipsState>(
+                                    listener: (context, state) {
+                                      // TODO: implement listener
+                                    },
+                                    builder: (context, state) {
+                                      var tipsCubit = context.read<TipsCubit>();
+                                      return GridView.builder(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 13, horizontal: 14),
+                                        itemCount: favouriteCubit
+                                                .groupedFavorites[favouriteCubit
+                                                    .selectedFeatureType]
+                                                ?.length ??
+                                            0,
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                childAspectRatio: 2 / 1.9,
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 15.0,
+                                                mainAxisSpacing: 15.0),
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          var item = favouriteCubit
+                                                  .groupedFavorites[
+                                              favouriteCubit
+                                                  .selectedFeatureType]![index];
+                                          return BlocProvider(
+                                            create: (context) => FavouriteCubit(
+                                                FavouriteRepoImpl())
+                                              ..fetchTipsDetails(
+                                                  docRef: item.docRef),
+                                            child: BlocBuilder<FavouriteCubit,
+                                                FavouriteState>(
+                                              builder: (context, state) {
+                                                if (state
+                                                    is FetchTipsDetailsLoadedState) {
+                                                  return PopularTipsWidget(
+                                                    tipsItem: state.tipItem,
+                                                    tipsCubit: tipsCubit,
+                                                  );
+                                                }
+                                                return Container();
+                                              },
+                                            ),
+                                          );
                                         },
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 )
                               : Container(),
                 ],
