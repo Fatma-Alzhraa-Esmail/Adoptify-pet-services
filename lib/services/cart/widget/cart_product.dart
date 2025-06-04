@@ -5,6 +5,7 @@ import 'package:peto_care/services/cart/model/cart_model.dart';
 import 'package:peto_care/services/shop_product_details/manger/shop_product_details_cubit.dart';
 import 'package:peto_care/services/shop_product_details/manger/shop_product_details_state.dart';
 import 'package:peto_care/services/shop_product_details/repo/product_details_repo_impl.dart';
+import 'package:peto_care/utilities/theme/media.dart';
 
 class CartProductWidget extends StatelessWidget {
  const CartProductWidget({super.key, required this.cartItem});
@@ -29,6 +30,7 @@ class CartProductWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 8, right: 15),
             child: Container(
+              
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
@@ -42,6 +44,7 @@ class CartProductWidget extends StatelessWidget {
                   ]),
               //  width: 185,
               height: 100,
+              width: MediaHelper.width,
               child: Row(
                 children: [
                   Padding(
@@ -96,7 +99,7 @@ class CartProductWidget extends StatelessWidget {
                         ],
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width - 140,
+                        // width: MediaQuery.of(context).size.width - 140,
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

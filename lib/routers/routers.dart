@@ -33,4 +33,6 @@ abstract class Routes {
   static const String FavouriteScreen = "FavouriteScreen";
   static const String TipsDetails = "TipsDetails";
   static const String TipsComments = "TipsComments";
+  static const String editAddress = "editAddress";
+  static const String chosePaymetWay = "chosePaymetWay";
 }

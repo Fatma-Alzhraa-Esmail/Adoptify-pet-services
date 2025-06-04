@@ -12,7 +12,6 @@ import io.flutter.plugin.common.EventChannel.EventSink
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
-
     private val CHANNEL = "petocare.open.my.app/channel"
     private val EVENTS = "petocare.open.my.app/events"
     private var startString: String? = null
@@ -30,40 +29,40 @@ class MainActivity: FlutterActivity() {
         }
 
         EventChannel(flutterEngine.dartExecutor, EVENTS).setStreamHandler(
-                object : EventChannel.StreamHandler {
-                    override fun onListen(args: Any?, events: EventSink) {
-                        linksReceiver = createChangeReceiver(events)
-                    }
-
-                    override fun onCancel(args: Any?) {
-                        linksReceiver = null
-                    }
+            object : EventChannel.StreamHandler {
+                override fun onListen(args: Any?, events: EventSink) {
+                    linksReceiver = createChangeReceiver(events)
                 }
+
+                override fun onCancel(args: Any?) {
+                    linksReceiver = null
+                }
+            }
         )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val intent = getIntent()
+        val intent = intent
         startString = intent.data?.toString()
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        if (intent.action === Intent.ACTION_VIEW) {
-            linksReceiver?.onReceive(this.applicationContext, intent)
+        if (intent.action == Intent.ACTION_VIEW) {
+            linksReceiver?.onReceive(applicationContext, intent)
         }
     }
 
-    fun createChangeReceiver(events: EventSink): BroadcastReceiver? {
+    private fun createChangeReceiver(events: EventSink): BroadcastReceiver {
         return object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) { // NOTE: assuming intent.getAction() is Intent.ACTION_VIEW
-                val dataString = intent.dataString ?:
-                events.error("UNAVAILABLE", "Link unavailable", null)
+            override fun onReceive(context: Context, intent: Intent) {
+                val dataString = intent.dataString ?: run {
+                    events.error("UNAVAILABLE", "Link unavailable", null)
+                    return
+                }
                 events.success(dataString)
             }
         }
     }
-
 }

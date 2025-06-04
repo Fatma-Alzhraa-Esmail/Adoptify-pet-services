@@ -33,4 +33,9 @@ class FirebaseFailure extends Failure {
         return FirebaseFailure('An unexpected error occurred. Please try again.');
     }
   }
+  
+}
+class ServerFailure extends Failure {
+  ServerFailure(super.errMessage);
+
 }

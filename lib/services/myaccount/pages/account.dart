@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peto_care/routers/navigator.dart';
 import 'package:peto_care/routers/routers.dart';
-import 'package:peto_care/services/myaccount/bloc/cubit.dart';
-import 'package:peto_care/services/myaccount/bloc/state.dart';
+
 import 'package:peto_care/services/myaccount/widget/complete_profile.dart';
 import 'package:peto_care/services/myaccount/widget/listtilewidget.dart';
 import 'package:peto_care/utilities/theme/colors/light_theme.dart';
@@ -110,28 +109,28 @@ class _AccountScreenState extends State<AccountScreen> {
             SizedBox(
               height: 10,
             ),
-            BlocProvider(
-                create: (BuildContext context) => CompleteProfileCubit(),
-                child: BlocConsumer<CompleteProfileCubit,
-                        CompleteProfileStates>(
-                    listener:
-                        (BuildContext context, CompleteProfileStates state) {},
-                    builder:
-                        (BuildContext context, CompleteProfileStates state) {
-                      CompleteProfileCubit cubit =
-                          CompleteProfileCubit.get(context);
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 130,
-                        child: ListView.builder(
-                            itemExtent: 130,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: cubit.completeprofilee.length,
-                            itemBuilder: (context, index) =>
-                                CompleteProfileWidget(
-                                    context, cubit.completeprofilee[index])),
-                      );
-                    })),
+            // BlocProvider(
+            //     create: (BuildContext context) => CompleteProfileCubit(),
+            //     child: BlocConsumer<CompleteProfileCubit,
+            //             CompleteProfileStates>(
+            //         listener:
+            //             (BuildContext context, CompleteProfileStates state) {},
+            //         builder:
+            //             (BuildContext context, CompleteProfileStates state) {
+            //           CompleteProfileCubit cubit =
+            //               CompleteProfileCubit.get(context);
+            //           return Container(
+            //             width: MediaQuery.of(context).size.width,
+            //             height: 130,
+            //             child: ListView.builder(
+            //                 itemExtent: 130,
+            //                 scrollDirection: Axis.horizontal,
+            //                 itemCount: cubit.completeprofilee.length,
+            //                 itemBuilder: (context, index) =>
+            //                     CompleteProfileWidget(
+            //                         context, cubit.completeprofilee[index])),
+            //           );
+            //         })),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Divider(

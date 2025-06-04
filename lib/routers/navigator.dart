@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:peto_care/routers/routers.dart';
+import 'package:peto_care/services/address/model/address.dart';
+import 'package:peto_care/services/address/pages/edit_address.dart';
 import 'package:peto_care/services/auth/Login/pages/login.dart';
 import 'package:peto_care/services/cart/pages/cart.dart';
 import 'package:peto_care/services/cart/pages/cart_edit.dart';
 import 'package:peto_care/services/cart/pages/complete_cart.dart';
-import 'package:peto_care/services/cart/pages/shipping.dart';
+import 'package:peto_care/services/shippingFlow/pages/payment_medthod.dart';
+import 'package:peto_care/services/shippingFlow/pages/shipping.dart';
 import 'package:peto_care/services/favourites/pages/favourite_page.dart';
 import 'package:peto_care/services/home/model/main_features_model.dart';
 import 'package:peto_care/services/home/model/product_model.dart';
 import 'package:peto_care/services/home/pages/main_feature_categories.dart';
 import 'package:peto_care/services/myaccount/pages/account_info.dart';
-import 'package:peto_care/services/myaccount/pages/add_new_address.dart';
+import 'package:peto_care/services/address/pages/add_new_address.dart';
 import 'package:peto_care/services/myaccount/pages/add_new_card.dart';
 import 'package:peto_care/services/myaccount/pages/address.dart';
 import 'package:peto_care/services/myaccount/pages/history.dart';
@@ -138,6 +141,12 @@ class CustomNavigator {
          final TipsModel tipsItemDetails =
             args;
         return _pageRoute(CommentsPage(tipsItem: tipsItemDetails,));
+         case Routes.editAddress:
+            final args = settings.arguments as AddressModel;
+         final AddressModel addressItemDetails =
+            args;
+        return _pageRoute(EditAddress(address: addressItemDetails,));
+        
     }
     return MaterialPageRoute(builder: (_) => Container());
   }

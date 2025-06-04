@@ -43,4 +43,6 @@ app.*.map.json
 /android/app/release
 strings.xml
 google-services.json
+api_key.dart
+lib/core/utils/api_key.dart
 firebase_options.dart
